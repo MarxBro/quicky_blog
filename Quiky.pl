@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 ######################################################################
-# Blog en una hora: hoy voy a hacer un blog estático en dos horas.
-# A ver que carajo sale de esto...
+# Blog en un rato.
 ######################################################################
 
 use strict;
@@ -26,6 +25,7 @@ Script para bloggear como un enfermo.
 =cut
 
 my $t_banana = strftime ("%d_%B_%Y_%H_%M_%S",localtime(time()));
+my $t_manzan = strftime ("%d-%B-%Y %H:%M",localtime(time()));
 
 =pod
 
@@ -54,6 +54,10 @@ unless (-d $dir_build){
 }
 my $dir_src     = "./src";
 my %linky       = ();
+
+# Un pie al final de cada página
+my $pie_html    = '<span>' . 'Última modificación: ' . 
+                    $t_manzan . 'by MarxBro.' . '</span>';
 
 ######################################################################
 #                                                               Main
@@ -94,18 +98,21 @@ sub build {
     my @Indexes = ();
     foreach my $page (@pages){
         my $shit = read_file($page);
+        my @ii_ = stat($page);
+        my $ultima_modificacion = $ii_[9];
         my $contenido = $header_with_css;
         $contenido .= '<body>' . "\n";
         $contenido .= markdown($shit) . "\n";
-        $contenido .= '</body></html>';
+        $contenido .= pie();
         my ($titulo_page,$titulo_index) = make_title($shit);
         my $nombre_archivo_final = $dir_build . '/' . $titulo_page . '.html';
-        $linky{$nombre_archivo_final} = $titulo_index;
+        $linky{$nombre_archivo_final} = $titulo_index . 'spliteo' . $ultima_modificacion;
         write_file( $nombre_archivo_final , $contenido );
     }
 
 # I N D E X
     my $indexin = $header_with_css;
+    $indexin .= '<body>';
     $indexin .= index_datas();
     $indexin .= do_index();
     my $indexin_file_nombre = $dir_build . '/index.html';
@@ -113,16 +120,24 @@ sub build {
 }
 
 sub do_index {
-    my $ind = '<body>';
+    my $ind = '<table>';
     foreach my $n_html_page (sort(keys(%linky))){
-        my $lllll    = '<a href="' . './' . $n_html_page . '" target="_blank">' . $linky{$n_html_page} . '</a>';  
+        my ($l,$modif) = split(/spliteo/, $linky{$n_html_page});
+        my $lllll    = '<tr><td>' .
+            '<a href="' . './' . $n_html_page . '" target="_blank">' . $l . 
+            '</a>' . '</td><td>' . $modif . '</td>' .
+            '</tr>';
         $ind        .= $lllll . "\n";
     }
-    $ind .= '</body></html>';
+    $ind .= '</table>';
+    $ind .= pie();
     return $ind;
 }
 
-
+sub pie{
+   my $fin = $pie_html . '</body></html>';
+   return $fin;
+}
 
 sub make_header {
     my $in = $_[0];
