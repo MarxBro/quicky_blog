@@ -10,3 +10,7 @@ Esta es una lista:
 * otra cosa
 
 __Esto está en negrita o cursiva__.
+
+
+Ahora voy a probar insertar una imágen: 
+![Pelotita](data/logo.jpg "A verr..")

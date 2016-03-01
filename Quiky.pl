@@ -12,7 +12,6 @@ use feature                 qw/say/;
 use File::Slurp             qw/read_file write_file/;
 use Text::Markdown          qw/markdown/;
 use File::Find::Rule;
-use File::Copy              qw/copy/;
 
 =pod
 
@@ -56,6 +55,8 @@ my %linky       = ();
 my $pie_html    = '<span>' . 'Última modificación: ' . 
                     $t_manzan . ' by <strong>MarxBro</strong>.' . '</span>';
 
+
+
 ######################################################################
 #                                                               Main
 ######################################################################
@@ -67,7 +68,9 @@ if ( $opts{h} ) {
         unless ( -d $dir_build ) {
             mkdir $dir_build;
             my $dir_b_css = $dir_build . '/css'; 
+            my $dir_data_css = $dir_build . '/data'; 
             mkdir $dir_b_css;
+            mkdir $dir_data_css;
         }
         build();
     }
@@ -86,13 +89,23 @@ sub ayudas {
 sub build {
     my @pages   =   get_stuff($dir_src, '*.md'); 
     my @css     =   get_stuff($dir_src, '*.css');
+    # Imagenes y cosas para linkear van a la carpeta data, 
+    # hacer el link relativo: /data/img.png, etc.
+    my @stuffs  =   get_stuff($dir_src, 'stuff');
+
+    foreach my $st (@stuffs){
+        my ($sty)       =   $st         =~ m/[\/]([^\/]+)$/;
+        my $final_st    =   $dir_build . '/data/' . $sty;
+        my $cm = 'cp ' . $st . ' '. $final_st;
+        say `$cm`;
+    }
 
     my $css_header_links = '';
     foreach my $css_src (@css){
         my $wd = read_file($css_src);
         my ($nombre_limpio) = $css_src =~ m/[\/]([^\/]+)$/;
         my $nombre_css_final = $dir_build . '/css/' . $nombre_limpio;
-        my $nombre_css_final_l = '/css/' . $nombre_limpio;
+        my $nombre_css_final_l = 'css/' . $nombre_limpio;
         write_file($nombre_css_final,$wd);
 
         #armar links
@@ -110,11 +123,11 @@ sub build {
         my $contenido = $header_with_css;
         $contenido .= '<body>' . "\n";
         $contenido .= markdown($shit) . "\n";
-        $contenido .= '<div><a href="index.html">Home</a></div>';
+        $contenido .= '<div><a href="index.html">Volver</a></div>';
         $contenido .= pie();
         my ($titulo_page,$titulo_index) = make_title($shit);
         my $nombre_archivo_final = $dir_build . '/' . $titulo_page . '.html';
-        my $nombre_archivo_final_l = '/' . $titulo_page . '.html';
+        my $nombre_archivo_final_l = $titulo_page . '.html';
         $linky{$nombre_archivo_final_l} = $titulo_index . 'spliteo' . $ultima_modificacion;
         write_file( $nombre_archivo_final , $contenido );
     }
@@ -134,7 +147,7 @@ sub do_index {
         my ($l,$modif) = split(/spliteo/, $linky{$n_html_page});
         my $modifiz = strftime ("%d-%B-%Y %H:%M",localtime( $modif ));
         my $lllll    = '<tr><td>' .
-            '<a href="' . $n_html_page . '" target="_blank">' . $l . 
+            '<a href="' . $n_html_page . '" >' . $l . 
             '</a>' . '</td><td>' . $modifiz . '</td>' .
             '</tr>';
         $ind        .= $lllll . "\n";
@@ -181,9 +194,16 @@ sub make_title {
 sub get_stuff {
     my $pp = $_[0];
     my $stuff = $_[1];
-    my @ff = File::Find::Rule   -> file ()
-                                -> name ($stuff)
-                                -> in   ($pp);
+    my @ff = ();
+    if ($stuff eq 'stuff'){
+        @ff = File::Find::Rule   -> file ()
+                                    -> name ('*.png', '*.jpeg', '*.jpg', '*.gif')
+                                    -> in   ($pp);
+    } else {
+        @ff = File::Find::Rule   -> file ()
+                                    -> name ($stuff)
+                                    -> in   ($pp);
+    }
     return @ff;
 }
 
