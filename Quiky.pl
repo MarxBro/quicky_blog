@@ -48,27 +48,30 @@ getopts('dhb',\%opts);
 $debug++ if $opts{d};
 
 # Configs
-my $dir_build   = "build" . "__" . $t_banana;
-unless (-d $dir_build){
-    mkdir $dir_build;
-}
+my $dir_build = "build" . "__" . $t_banana;
 my $dir_src     = "./src";
 my %linky       = ();
 
 # Un pie al final de cada página
 my $pie_html    = '<span>' . 'Última modificación: ' . 
-                    $t_manzan . 'by MarxBro.' . '</span>';
+                    $t_manzan . ' by <strong>MarxBro</strong>.' . '</span>';
 
 ######################################################################
 #                                                               Main
 ######################################################################
-if ($opts{h}){
+if ( $opts{h} ) {
     ayudas();
     exit 0;
 } else {
-    if ($opts{b}){
+    if ( $opts{b} ) {
+        unless ( -d $dir_build ) {
+            mkdir $dir_build;
+            my $dir_b_css = $dir_build . '/css'; 
+            mkdir $dir_b_css;
+        }
         build();
-    } else {
+    }
+    else {
         ayudas() and die;
     }
 }
@@ -86,11 +89,15 @@ sub build {
 
     my $css_header_links = '';
     foreach my $css_src (@css){
-        my $nombre_css_final = $dir_build . '/' . $css_src;
-        #copiarlo al build dir
-        copy $css_src, $nombre_css_final;
+        my $wd = read_file($css_src);
+        my ($nombre_limpio) = $css_src =~ m/[\/]([^\/]+)$/;
+        my $nombre_css_final = $dir_build . '/css/' . $nombre_limpio;
+        my $nombre_css_final_l = '/css/' . $nombre_limpio;
+        write_file($nombre_css_final,$wd);
+
         #armar links
-        my $link_final_css = '<link rel="stylesheet" type="text/css" href="' . $nombre_css_final . '">';
+        my $link_final_css = '<link rel="stylesheet" type="text/css" href="' . 
+                                $nombre_css_final_l . '">';
         $css_header_links .= $link_final_css . "\n";
     }
     my $header_with_css = make_header ($css_header_links);
@@ -103,10 +110,12 @@ sub build {
         my $contenido = $header_with_css;
         $contenido .= '<body>' . "\n";
         $contenido .= markdown($shit) . "\n";
+        $contenido .= '<div><a href="index.html">Home</a></div>';
         $contenido .= pie();
         my ($titulo_page,$titulo_index) = make_title($shit);
         my $nombre_archivo_final = $dir_build . '/' . $titulo_page . '.html';
-        $linky{$nombre_archivo_final} = $titulo_index . 'spliteo' . $ultima_modificacion;
+        my $nombre_archivo_final_l = '/' . $titulo_page . '.html';
+        $linky{$nombre_archivo_final_l} = $titulo_index . 'spliteo' . $ultima_modificacion;
         write_file( $nombre_archivo_final , $contenido );
     }
 
@@ -123,9 +132,10 @@ sub do_index {
     my $ind = '<table>';
     foreach my $n_html_page (sort(keys(%linky))){
         my ($l,$modif) = split(/spliteo/, $linky{$n_html_page});
+        my $modifiz = strftime ("%d-%B-%Y %H:%M",localtime( $modif ));
         my $lllll    = '<tr><td>' .
-            '<a href="' . './' . $n_html_page . '" target="_blank">' . $l . 
-            '</a>' . '</td><td>' . $modif . '</td>' .
+            '<a href="' . $n_html_page . '" target="_blank">' . $l . 
+            '</a>' . '</td><td>' . $modifiz . '</td>' .
             '</tr>';
         $ind        .= $lllll . "\n";
     }
