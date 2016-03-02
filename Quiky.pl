@@ -106,7 +106,7 @@ sub build {
         my ($nombre_limpio) = $css_src =~ m/[\/]([^\/]+)$/;
         my $nombre_css_final = $dir_build . '/css/' . $nombre_limpio;
         my $nombre_css_final_l = 'css/' . $nombre_limpio;
-        write_file($nombre_css_final,$wd);
+        write_file($nombre_css_final,optimize($wd, 1));
 
         #armar links
         my $link_final_css = '<link rel="stylesheet" type="text/css" href="' . 
@@ -129,7 +129,7 @@ sub build {
         my $nombre_archivo_final = $dir_build . '/' . $titulo_page . '.html';
         my $nombre_archivo_final_l = $titulo_page . '.html';
         $linky{$nombre_archivo_final_l} = $titulo_index . 'spliteo' . $ultima_modificacion;
-        write_file( $nombre_archivo_final , $contenido );
+        write_file( $nombre_archivo_final , optimize($contenido , 0));
     }
 
 # I N D E X
@@ -217,7 +217,15 @@ sub index_datas {
     return $coso;
 }
 
-
+sub optimize {
+    my $inputy = $_[0];
+    my $espacios = $_[1];
+    $inputy =~ s/\n+|\t+//g;
+    if ($espacios) {
+        $inputy =~ s/\s+//g;
+    }
+    return $inputy;
+    }
 
 
 
