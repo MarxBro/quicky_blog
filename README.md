@@ -1,6 +1,6 @@
-# Juguete
+# Juguete blogueador
 
-Un blog en dos horas... O algo así.
+Un blog system que voy haciendo en el tiempo libre.
 
 Para compilar:
 
@@ -9,6 +9,8 @@ Para compilar:
 ```
 
 La gilada va en src y se crea la carpete "buildfechafecha".
+
+Hasta ahora soporta imágenes, código y archivos, por la gracia del markdown.
 
 
 Puto el que lee.

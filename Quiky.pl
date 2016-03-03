@@ -55,6 +55,8 @@ my %linky       = ();
 my $pie_html    = '<span>' . 'Última modificación: ' . 
                     $t_manzan . ' by <strong>MarxBro</strong>.' . '</span>';
 
+#Favicon: Previene el error 404
+my $favico_link_para_header = '<link rel="shortcut icon" href="favicon.ico"/>';
 
 
 ######################################################################
@@ -92,6 +94,12 @@ sub build {
     # Imagenes y cosas para linkear van a la carpeta data, 
     # hacer el link relativo: /data/img.png, etc.
     my @stuffs  =   get_stuff($dir_src, 'stuff');
+
+    # Favicon
+    if (-e './src/favicon.ico'){
+        my $copy_favicon = 'cp src/favicon.ico ' . $dir_build . '/'. 'favicon.ico';
+        `$copy_favicon`;
+        }
 
     foreach my $st (@stuffs){
         my ($sty)       =   $st         =~ m/[\/]([^\/]+)$/;
@@ -165,7 +173,7 @@ sub pie{
 sub make_header {
     my $in = $_[0];
     my $fucking_utf = '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>' . "\n";
-    my $H = '<!doctype html><head>' . $in . "\n" . $fucking_utf . '</head>';
+    my $H = '<!doctype html><head>' . $favico_link_para_header . "\n" . $in . "\n" . $fucking_utf . '</head>';
     return $H;    
 }
 
