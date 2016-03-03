@@ -12,5 +12,7 @@ La gilada va en src y se crea la carpete "buildfechafecha".
 
 Hasta ahora soporta imágenes, código y archivos, por la gracia del markdown.
 
+Los archivos para descargar van en la carpeta "src/dwns" y se vinculan desde ahí
+mediante el markdown (a.k.a links).
 
-Puto el que lee.
+Creo que no va a soportar mucho mas.
