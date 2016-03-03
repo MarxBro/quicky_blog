@@ -49,6 +49,7 @@ $debug++ if $opts{d};
 # Configs
 my $dir_build = "build" . "__" . $t_banana;
 my $dir_src     = "./src";
+my $dir_dwns    = "dwns";
 my %linky       = ();
 
 # Un pie al final de cada página
@@ -58,6 +59,7 @@ my $pie_html    = '<span>' . 'Última modificación: ' .
 #Favicon: Previene el error 404
 my $favico_link_para_header = '<link rel="shortcut icon" href="favicon.ico"/>';
 
+my $exitos = "Todo anduvo joya; en la carpeta " . $dir_build . " esta el blog.";
 
 ######################################################################
 #                                                               Main
@@ -75,6 +77,7 @@ if ( $opts{h} ) {
             mkdir $dir_data_css;
         }
         build();
+        say $exitos and exit 0;
     }
     else {
         ayudas() and die;
@@ -95,17 +98,25 @@ sub build {
     # hacer el link relativo: /data/img.png, etc.
     my @stuffs  =   get_stuff($dir_src, 'stuff');
 
-    # Favicon
+    # Favicon: sin no existe, a fumarse el 404.
     if (-e './src/favicon.ico'){
         my $copy_favicon = 'cp src/favicon.ico ' . $dir_build . '/'. 'favicon.ico';
         `$copy_favicon`;
-        }
+    }
+
+    # Downloads
+    my $src_dwns = $dir_src . '/' . $dir_dwns;
+    if (-d $src_dwns){
+        my $cm_dwns = 'cp -r ' . $src_dwns . ' ' . $dir_build . '/dwns';
+        `$cm_dwns`;
+    }
+    
 
     foreach my $st (@stuffs){
         my ($sty)       =   $st         =~ m/[\/]([^\/]+)$/;
         my $final_st    =   $dir_build . '/data/' . $sty;
         my $cm = 'cp ' . $st . ' '. $final_st;
-        say `$cm`;
+        `$cm`;
     }
 
     my $css_header_links = '';
