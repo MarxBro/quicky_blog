@@ -79,9 +79,9 @@ my $comments = '
 <noscript>JavaScript es necesario para ver los <a href="https://disqus.com/?ref_noscript" rel="nofollow">comentarios.</a></noscript>
 ';
 
-my $disqus_page_url         = 'https://3456.com.ar' ;
-my $disqus_identifier       = '3456';
-my $disqus_forum_shortname  = '3456';
+my $disqus_page_url         = '"https://3456.com.ar"' ;
+my $disqus_identifier       = '"3456"';
+my $disqus_forum_shortname  = '"3456"';
 
 $comments =~ s/PAGE_URL/$disqus_page_url/;             #// Replace PAGE_URL with your page's canonical URL variable
 $comments =~ s/PAGE_IDENTIFIER/$disqus_identifier/;    #// Replace PAGE_IDENTIFIER with your page's unique identifier variable
