@@ -1,6 +1,6 @@
 # cpanp
 
-Simepre comento que hay que instalar tal o cual módulo de Perl para hacer alguna cosa.
+Siempre comento que hay que instalar tal o cual módulo de Perl para hacer alguna cosa.
 
 Alcanza con ejecutar el siguiente comando:
 	

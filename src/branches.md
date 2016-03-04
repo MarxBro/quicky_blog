@@ -10,6 +10,7 @@ estábamos parados en el "nuevoBranch".
 Nota: ahora hay que "pushear" y "pullear" al "nuevoBranch" y no a __master__.
 
     git push origin nuevoBranch
+
     git pull origin nuevoBranch
 
 Para saber en que branch estamos parados, alcanza con:
