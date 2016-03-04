@@ -295,9 +295,13 @@ Zaijian.
 
 __DATA__
 
-# Bloggy
+# 3456
 
-Hola este un blog de prueba.
+Hola este un blog personal.
+
+Acá escribo lo que se me antoja... sep.
+
+Se llama así porque __re-pintó__.
 
 Abajo hay una lista de entradas.
 
