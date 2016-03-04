@@ -1,3 +1,0 @@
-# Un archivo más
-
-Este es más __complicado__: tiene acentos y espacios en el título...

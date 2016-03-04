@@ -297,13 +297,7 @@ __DATA__
 
 # Bloggy
 
-Hola esta es una prueba.
-
-Por el momento estaría, en poco tiempo lo saqué andando.
-
-Faltan las imagenes y majorar el layout (aunque iría con el css, creo).
-
-No tiene ningún soporte para js todavía... una cagada, sep, pero anda.
+Hola este un blog de prueba.
 
 Abajo hay una lista de entradas.
 
