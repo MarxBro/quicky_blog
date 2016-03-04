@@ -1,7 +1,7 @@
 body { 
     margin: 5%; 
     text-align: justify; 
-    font-size: 137%; 
+    font-size: 117%; 
     font-family: serif; 
     display: block ; 
     }
@@ -34,5 +34,5 @@ div,span,table {
 }
 div,span {
     text-align: right;
-    font-size: 85%; 
+    font-size: 75%; 
 }
