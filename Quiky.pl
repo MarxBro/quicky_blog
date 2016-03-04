@@ -301,12 +301,12 @@ Hola este un blog personal... o algo así.
 
 Me acostumbré a firmar como __MarxBro__ y eso no creo que cambie en un futuro cercano.
 
-Acá escribo lo que se me va pareciendo relevante de dejar escrito.
-No es gran cosa y responde casi exclusivamente a mis caprichos informáticos (sobre Perl, Linux y no mucho más).
+Acá escribo lo que me va pareciendo relevante de dejar escrito o simplemente, tengo ganas de escribir.
+No es gran cosa y responde casi exclusivamente a mis caprichos informáticos (sobre Perl, Linux y lo que vaya apareciendo).
 
 Mi perfil en github y mis repositorios está [a su disposición](https://github.com/MarxBro).
 
-Dejen un comentario si tienen algo que decir (nah).
+Dejen un comentario si tienen algo que decirme/corregirme.
 
 La página se llama así porque __re-pintó__ y está hecha en bas a un CMS que hice por ahí.
 
