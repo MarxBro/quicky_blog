@@ -70,12 +70,12 @@ my $comments = '
     };
     (function() { 
         var d = document, s = d.createElement(\'script\');
-        s.src = 'https://EXAMPLE.disqus.com/embed.js'; 
-        s.setAttribute('data-timestamp', +new Date());
+        s.src = \'https://EXAMPLE.disqus.com/embed.js\'; 
+        s.setAttribute(\'data-timestamp\', +new Date());
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<noscript>JavaScript es necesario para ver los <a href="https://disqus.com/?ref_noscript" rel="nofollow">comentarios.</a></noscript>
 ';
 
 my $disqus_page_url         = 'https://3456.com.ar' ;
