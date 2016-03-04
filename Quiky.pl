@@ -62,6 +62,7 @@ my $favico_link_para_header = '<link rel="shortcut icon" href="favicon.ico"/>';
 my $exitos = "Todo anduvo joya; en la carpeta " . $dir_build . " esta el blog.";
 
 # C O M E N T A R I O S -> disqus.
+my $comments_allow = 1;
 my $comments = '
 <div id="disqus_thread"></div><script>
     var disqus_config = function () {
@@ -169,6 +170,9 @@ sub build {
         my $contenido = $header_with_css;
         $contenido .= '<body>' . "\n";
         $contenido .= markdown($shit) . "\n";
+        if ($comments_allow){
+            $contenido .= $comments;
+        }
         $contenido .= '<div><a href="index.html">Volver</a></div>';
         $contenido .= pie();
         my ($titulo_page,$titulo_index) = make_title($shit);
