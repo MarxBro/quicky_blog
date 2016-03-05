@@ -12,6 +12,7 @@ use feature                 qw/say/;
 use File::Slurp             qw/read_file write_file/;
 use Text::Markdown          qw/markdown/;
 use File::Find::Rule;
+use List::MoreUtils         qw/uniq/;
 
 =pod
 
@@ -59,35 +60,17 @@ my $pie_html    = '<span>' . 'Última modificación: ' .
 #Favicon: Previene el error 404
 my $favico_link_para_header = '<link rel="shortcut icon" href="favicon.ico"/>';
 
-my $exitos = "Todo anduvo joya; en la carpeta " . $dir_build . " esta el blog.";
-
 # C O M E N T A R I O S -> disqus.
-my $comments_allow = 1;
-my $comments = '
-<div id="disqus_thread"></div><script>
-    var disqus_config = function () {
-        this.page.url = PAGE_URL;
-        this.page.identifier = PAGE_IDENTIFIER;
-    };
-    (function() { 
-        var d = document, s = d.createElement("script");
-        s.src = "https://EXAMPLE.disqus.com/embed.js"; 
-        s.setAttribute("data-timestamp", +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>JavaScript es necesario para ver los <a href="https://disqus.com/?ref_noscript" rel="nofollow">comentarios.</a></noscript>
-';
+my $comments_allow = 1; # Cambiar variables en la funcion embed_comments();
 
-my $disqus_page_url         = '"https://3456.com.ar"' ;
-my $disqus_identifier       = '"3456"';
-my $disqus_forum_shortname  = 3456;
-
-$comments =~ s/PAGE_URL/$disqus_page_url/;             #// Replace PAGE_URL with your page's canonical URL variable
-$comments =~ s/PAGE_IDENTIFIER/$disqus_identifier/;    #// Replace PAGE_IDENTIFIER with your page's unique identifier variable
-$comments =~ s/EXAMPLE/$disqus_forum_shortname/;       #// IMPORTANT: Replace EXAMPLE with your forum shortname!
+# S E O ( o algo asi )
+my @keywords_fixed = ( qw /tecnologia linux perl git libre español administrador seo web internet redes free programación coding/ );
+my $blog_autores = '"MarxBro"';
+my $blog_desc = '"Blog personal acerca de linux, perl, tecnologías libre y la mar en coche."';
 
 
+
+my $exitos = "Todo anduvo joya; en la carpeta " . $dir_build . " esta el blog.";
 
 ######################################################################
 #                                                               Main
@@ -165,12 +148,14 @@ sub build {
     my @Indexes = ();
     foreach my $page (@pages){
         my $shit = read_file($page);
+        #my $dinamic_keys = get_keywords($shit); # no tenemos uso tdv
         my @ii_ = stat($page);
         my $ultima_modificacion = $ii_[9];
         my $contenido = $header_with_css;
         $contenido .= '<body>' . "\n";
         $contenido .= markdown($shit) . "\n";
         if ($comments_allow){
+            my $comments = embed_comments();
             $contenido .= $comments;
         }
         $contenido .= '<div><a href="index.html">Volver</a></div>';
@@ -182,13 +167,32 @@ sub build {
         write_file( $nombre_archivo_final , optimize($contenido , 0));
     }
 
+
 # I N D E X
     my $indexin = $header_with_css;
     $indexin .= '<body>';
     $indexin .= index_datas();
     $indexin .= do_index();
     my $indexin_file_nombre = $dir_build . '/index.html';
-    write_file( $indexin_file_nombre , $indexin );
+    write_file( $indexin_file_nombre , optimize($indexin,0) );
+}
+
+sub do_SEOand_shut_up{
+    my $meta_desc = '<meta name="description" content=' . $blog_desc . '>';
+    my $meta_author = '<meta name="author" content=' . $blog_autores . '>';
+    my $meta_key = '<meta name="keywords" content=';
+    my $string_keywords = '"' . join(', ',@keywords_fixed) . '"' . '>';
+    my $final_string_seo = $meta_author . $meta_desc . $meta_key . $string_keywords;
+    return $final_string_seo;
+}
+
+sub get_keywords {
+    # a keywords is anything longer than 5 caracters. 
+    my $inputo = $_[0];
+    my @words = split(/\s+/,$inputo);
+    my @words_b = map { $_ =~ /\W+(\w+)\W+/gi ? length ($1) >= 5 ?  $1 : () : () } uniq(@words);
+    my $cdeJu = join (', ',@words_b);
+    return $cdeJu;
 }
 
 sub do_index {
@@ -215,7 +219,8 @@ sub pie{
 sub make_header {
     my $in = $_[0];
     my $fucking_utf = '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>' . "\n";
-    my $H = '<!doctype html><head>' . $favico_link_para_header . "\n" . $in . "\n" . $fucking_utf . '</head>';
+    my $fucking_seo = do_SEOand_shut_up();
+    my $H = '<!doctype html><head>' . $fucking_seo . $favico_link_para_header . "\n" . $in . "\n" . $fucking_utf . '</head>';
     return $H;    
 }
 
@@ -278,6 +283,33 @@ sub optimize {
     }
 
 
+sub embed_comments {
+    my $disqus_page_url         = '"https://3456.com.ar"' ;
+    my $disqus_identifier       = '"3456"';
+    my $disqus_forum_shortname  = 3456;
+
+    my $comments = '
+<div id="disqus_thread"></div><script>
+    var disqus_config = function () {
+        this.page.url = PAGE_URL;
+        this.page.identifier = PAGE_IDENTIFIER;
+    };
+    (function() { 
+        var d = document, s = d.createElement("script");
+        s.src = "https://EXAMPLE.disqus.com/embed.js"; 
+        s.setAttribute("data-timestamp", +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>JavaScript es necesario para ver los <a href="https://disqus.com/?ref_noscript" rel="nofollow">comentarios.</a></noscript>
+';
+
+
+    $comments =~ s/PAGE_URL/$disqus_page_url/;             #// Replace PAGE_URL with your page's canonical URL variable
+    $comments =~ s/PAGE_IDENTIFIER/$disqus_identifier/;    #// Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    $comments =~ s/EXAMPLE/$disqus_forum_shortname/;       #// IMPORTANT: Replace EXAMPLE with your forum shortname!
+    return $comments;
+}
 
 ######################################################################
 #                                                       P O D  Z O N E
