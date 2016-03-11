@@ -15,7 +15,7 @@ distribución (escenario muy común).
 Al día de hoy uso cpan-minus y simplemente lo recomiendo.
 No requiere ninguna configuración para hacer el trabajo y 'funka'.
 
-Los paths donde los móodulos residen son un asuento bastante oscuro y responden a 
+Los paths donde los módulos residen son un asunto bastante oscuro y responden a 
 diferenciaciones de antaño, que tenían sentido en la época en que Perl nació... Siempre
 me dió esa impresión y siempre que necesité instalar módulos, me era difícil saber con 
 anterioridad a dónde iban a parar los archivos que lo componían.
