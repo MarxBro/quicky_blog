@@ -275,12 +275,14 @@ sub index_datas {
 sub optimize {
     my $inputy = $_[0];
     my $espacios = $_[1];
-    $inputy =~ s/\n+|\t+//g;
-    if ($espacios) {
-        $inputy =~ s/\s+//g;
+    unless($inputy =~ m/<code>/g){
+        $inputy =~ s/\n+|\t+//g;
+        if ($espacios) {
+            $inputy =~ s/\s+//g;
+        }
     }
     return $inputy;
-    }
+}
 
 
 sub embed_comments {
