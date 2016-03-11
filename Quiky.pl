@@ -13,6 +13,7 @@ use File::Slurp             qw/read_file write_file/;
 use Text::Markdown          qw/markdown/;
 use File::Find::Rule;
 use List::MoreUtils         qw/uniq/;
+#use Data::Dumper            qw/Dumper/;
 
 =pod
 
@@ -163,7 +164,7 @@ sub build {
         my ($titulo_page,$titulo_index) = make_title($shit);
         my $nombre_archivo_final = $dir_build . '/' . $titulo_page . '.html';
         my $nombre_archivo_final_l = $titulo_page . '.html';
-        $linky{$nombre_archivo_final_l} = $titulo_index . 'spliteo' . $ultima_modificacion;
+        $linky{$nombre_archivo_final_l} = $ultima_modificacion . 'spliteo' . $titulo_index;
         write_file( $nombre_archivo_final , optimize($contenido , 0));
     }
 
@@ -197,9 +198,10 @@ sub get_keywords {
 
 sub do_index {
     my $ind = '<table>';
-    foreach my $n_html_page (sort(keys(%linky))){
-        my ($l,$modif) = split(/spliteo/, $linky{$n_html_page});
-        my $modifiz = strftime ("%d-%B-%Y %H:%M",localtime( $modif ));
+    # Agregado: Ordenar la table por fecha, desc
+    foreach my $n_html_page (reverse(sort { $linky{$a} <=> $linky{$b} } keys %linky)){
+        my ($modif,$l) = split(/spliteo/, $linky{$n_html_page});
+        my $modifiz = strftime ("%d-%B-%Y",localtime( $modif ));
         my $lllll    = '<tr><td>' .
             '<a href="' . $n_html_page . '" >' . $l . 
             '</a>' . '</td><td>' . $modifiz . '</td>' .
