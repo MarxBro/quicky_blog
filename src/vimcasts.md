@@ -23,7 +23,7 @@ Calculo que se pueden encadenar así, pero no lo probé:
 	wget -O - http://media.vimcasts.org/videos/index.json 2>/dev/null | grep url | awk -F'"' '{print $4}' | wget -i
 
 La carpeta donde lo hice me quedó bastante desordenada. Me gustaría ordenarla por fecha de creación del archivo o algo así.
-Por suerte los videos está bien rotulados y el formato ogv es -para mi gusto personal- óptimo. Los renomré así:
+Por suerte los videos están bien rotulados y el formato ogv es -para mi gusto personal- óptimo. Los renombré así:
 
 	for i in *ogv; do mv $i $(ls -l $i | awk '{print $6 "-" $7 "-" $8}')_$i; done
 
