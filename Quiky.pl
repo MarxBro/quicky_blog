@@ -56,7 +56,8 @@ my %linky       = ();
 
 # Un pie al final de cada página
 my $pie_html    = '<span>' . 'Última modificación: ' . 
-                    $t_manzan . ' by <strong>MarxBro</strong>.' . '</span>';
+                    $t_manzan . ' by <strong>MarxBro</strong>.' . '<a href="http://www.wtfpl.net/"><img src="/data/wtfpl.png" alt="WTFPL 2016" /></a>'
+                     . '</span>';
 
 #Favicon: Previene el error 404
 my $favico_link_para_header = '<link rel="shortcut icon" href="favicon.ico"/>';
