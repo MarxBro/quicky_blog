@@ -1,4 +1,4 @@
-# cpanp
+# cpanp: bases para instalar módulos en Perl
 
 Siempre comento que hay que instalar tal o cual módulo de Perl para hacer alguna cosa.
 
