@@ -73,16 +73,18 @@ my $apache_target= 1; # poner en 0 si el servidor en nginx u otro.
 my $htaccess = <<EOF
 Options -Indexes -FollowSymLinks
 
-# compresion gzip
-AddOutputFilterByType DEFLATE text/plain
-AddOutputFilterByType DEFLATE text/html
-AddOutputFilterByType DEFLATE text/xml
-AddOutputFilterByType DEFLATE text/css
-AddOutputFilterByType DEFLATE application/xml
-AddOutputFilterByType DEFLATE application/xhtml+xml
-AddOutputFilterByType DEFLATE application/rss+xml
-AddOutputFilterByType DEFLATE application/javascript
-AddOutputFilterByType DEFLATE application/x-javascript
+# compresion 
+<ifModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+</ifModule>
 
 # cachetear
 <ifModule mod_expires.c>
@@ -353,6 +355,7 @@ sub embed_comments {
 sub do_htaccess {
     my $ht_nn = $dir_build . '/.htaccess' ;
     write_file($ht_nn,$htaccess);
+    chmod 0755, $ht_nn;
 }
 
 ######################################################################
