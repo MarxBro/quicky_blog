@@ -242,6 +242,7 @@ sub make_title {
     $c =~ s/ú/u/gi;
     $c =~ s/ñ/ñ/gi;
     $c =~ s/!/sep/gi;
+    $c =~ s/://gi;
     return ($c, $d);
 }
 
