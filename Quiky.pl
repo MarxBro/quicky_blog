@@ -71,6 +71,8 @@ my $blog_desc = '"Blog personal acerca de linux, perl, tecnologías libre y la m
 
 my $apache_target= 1; # poner en 0 si el servidor en nginx u otro.
 my $htaccess = <<EOF
+# Fijarse que el directorio desde donde se sirve el contenido tenga:
+# AllowOverride All, o nada de esto va a andar.
 Options -Indexes -FollowSymLinks
 
 # compresion 

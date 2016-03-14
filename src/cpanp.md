@@ -12,7 +12,7 @@ configurando que efectivamente instalando el módulo. Ni que hablar cuando es un
 remoto o con los módulos empaquetados y distribuídos por separado en el repo oficial de la 
 distribución (escenario muy común).
 
-Al día de hoy uso cpan-minus y simplemente lo recomiendo.
+Al día de hoy uso _cpanplus_ y simplemente lo recomiendo.
 No requiere ninguna configuración para hacer el trabajo y 'funka'.
 
 Los paths donde los módulos residen son un asunto bastante oscuro y responden a 
