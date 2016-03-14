@@ -69,7 +69,40 @@ my @keywords_fixed = ( qw /tecnologia linux perl git libre español administrado
 my $blog_autores = '"MarxBro"';
 my $blog_desc = '"Blog personal acerca de linux, perl, tecnologías libre y la mar en coche."';
 
+my $apache_target= 1; # poner en 0 si el servidor en nginx u otro.
+my $htaccess = <<EOF
+Options -Indexes -FollowSymLinks
 
+# compresion gzip
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+
+# cachetear
+<ifModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/gif "access plus 1 months"
+  ExpiresByType image/jpg "access plus 1 months"
+  ExpiresByType image/jpeg "access plus 1 months"
+  ExpiresByType image/png "access plus 1 months"
+  ExpiresByType image/vnd.microsoft.icon "access plus 1 months"
+  ExpiresByType image/x-icon "access plus 1 months"
+  ExpiresByType image/ico "access plus 1 months"
+  ExpiresByType application/javascript "now plus 1 months"
+  ExpiresByType application/x-javascript "now plus 1 months"
+  ExpiresByType text/javascript "now plus 1 months"
+  ExpiresByType text/css "now plus 1 months"
+  ExpiresDefault "access plus 1 days"
+</ifModule>
+
+EOF
+;
 
 my $exitos = "Todo anduvo joya; en la carpeta " . $dir_build . " esta el blog.";
 
@@ -176,6 +209,7 @@ sub build {
     $indexin .= do_index();
     my $indexin_file_nombre = $dir_build . '/index.html';
     write_file( $indexin_file_nombre , optimize($indexin,0) );
+    do_htaccess();
 }
 
 sub do_SEOand_shut_up{
@@ -314,6 +348,11 @@ sub embed_comments {
     $comments =~ s/PAGE_IDENTIFIER/$disqus_identifier/;    #// Replace PAGE_IDENTIFIER with your page's unique identifier variable
     $comments =~ s/EXAMPLE/$disqus_forum_shortname/;       #// IMPORTANT: Replace EXAMPLE with your forum shortname!
     return $comments;
+}
+
+sub do_htaccess {
+    my $ht_nn = $dir_build . '/.htaccess' ;
+    write_file($ht_nn,$htaccess);
 }
 
 ######################################################################
