@@ -59,8 +59,7 @@ ahí).
 
 Es más seguro ya que no hay código expuesto (con la excepción de disqus).
 
-Y por último, es __suficiente__ para lo que quiero decir, tengo en mente y
-espero de este proyecto.
+Y por último, es __suficiente__ para lo que quiero decir, tengo en mente y espero de este proyecto.
 
 ## ¿Y el css?
 
@@ -78,7 +77,7 @@ Sep...
 Para optimizar todo un poco, hice que agregue un __.htaccess__ 
 con compresión y control del tiempo de expiración (el famoso "mod expires") en la carpeta final.
 
-Me quedaría agregarle algo equivalente para __nginx__, pero como es estático, este asunto en
+Me quedaría agregarle algo equivalente para __nginx__, pero como es estático, este asunto en 
 particular no me representa ninguna prioridad (la carpeta final pesa como 2Kb, 
 comprimido es la mitad, no se si tiene sentido optimizarlo más).
 
