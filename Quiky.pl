@@ -239,7 +239,7 @@ sub do_index {
     # Agregado: Ordenar la table por fecha, desc
     foreach my $n_html_page (reverse(sort { $linky{$a} <=> $linky{$b} } keys %linky)){
         my ($modif,$l) = split(/spliteo/, $linky{$n_html_page});
-        my $modifiz = strftime ("%d-%B-%Y",localtime( $modif ));
+        my $modifiz = strftime ("%d de %B del %Y a las %H:%M",localtime( $modif ));
         my $lllll    = '<tr><td>' .
             '<a href="' . $n_html_page . '" >' . $l . 
             '</a>' . '</td><td>' . $modifiz . '</td>' .
@@ -310,6 +310,8 @@ sub index_datas {
         $md .= $_;
     }
     my $coso = markdown($md);
+    $coso =~ s#<h1>#<header><h1>#;
+    $coso =~ s#</h2>#</h2></header>#;
     return $coso;
 }
 
@@ -378,7 +380,7 @@ __DATA__
 
 # 3456
 
-Hola este un blog personal... o algo así. 
+## Este un blog personal... o algo así.
 
 Me acostumbré a firmar como __MarxBro__ y eso no creo que cambie en un futuro cercano.
 
@@ -391,6 +393,6 @@ Dejen un comentario si tienen algo que decirme, corregirme, putearme, etc.
 
 La página se llama así porque __re-pintó__ y está hecha en bas a un CMS que hice por ahí.
 
-Abajo hay una lista de las cosas que voy escribiendo.
+Abajo hay una lista de las cosas que voy escribiendo y reescribiendo.
 
 ## Entradas:
