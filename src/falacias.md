@@ -13,7 +13,4 @@ sus estructuras, las rotulaba y explicaba en detalle.
 
 Está en inglés y no me acuerdo la fuente desde dónde lo recopilé... Perdón.
 
-Dejo el [archivo pdf](/dwns/BIG.pdf) y el repositorio github
-[acá](https://github.com/MarxBro/fallacies), donde pueden clonarlo y bajarse los
-markdowns.
-
+Dejo el [archivo pdf](/dwns/BIG.pdf) y el repositorio github [acá](https://github.com/MarxBro/fallacies), donde pueden clonarlo y bajarse los markdowns.  
