@@ -56,7 +56,7 @@ my %linky       = ();
 
 # Un pie al final de cada página
 my $pie_html    = '<span>' . 'Última modificación: ' . 
-                    $t_manzan . ' by <strong>MarxBro</strong>.' . '<a href="http://www.wtfpl.net/"><img src="/data/wtfpl.png" alt="WTFPL 2016" /></a>'
+                    $t_manzan . ' by <strong>MarxBro</strong>.' . '<a href="http://www.wtfpl.net/"><img src="/data/wtfpl.png" alt="MarxBro. WTFPL-2016" /></a>'
                      . '</span>';
 
 #Favicon: Previene el error 404
@@ -108,6 +108,9 @@ Options -Indexes -FollowSymLinks
 
 EOF
 ;
+
+
+my $div_return_home = '<div><a href="index.html">Volver</a></div>';
 
 my $exitos = "Todo anduvo joya; en la carpeta " . $dir_build . " esta el blog.";
 
@@ -192,12 +195,13 @@ sub build {
         my $ultima_modificacion = $ii_[9];
         my $contenido = $header_with_css;
         $contenido .= '<body>' . "\n";
+        $contenido .= $div_return_home;
         $contenido .= markdown($shit) . "\n";
         if ($comments_allow){
             my $comments = embed_comments();
             $contenido .= $comments;
         }
-        $contenido .= '<div><a href="index.html">Volver</a></div>';
+        $contenido .= $div_return_home;
         $contenido .= pie();
         my ($titulo_page,$titulo_index) = make_title($shit);
         my $nombre_archivo_final = $dir_build . '/' . $titulo_page . '.html';
