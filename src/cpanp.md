@@ -57,7 +57,7 @@ un módulo).
 
 Una vez escuché por ahí:
 
-	"CPAN es mi lenguaje; Perl es mi framework."
+> "CPAN es mi lenguaje; Perl es mi framework."
 
 Y eso es todo por ahora...
 

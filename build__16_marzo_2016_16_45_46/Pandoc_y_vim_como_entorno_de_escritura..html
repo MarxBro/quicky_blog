@@ -1,0 +1,159 @@
+<!doctype html><head><meta name="author" content="MarxBro"><meta name="description" content="Blog personal acerca de linux, perl, tecnologías libre y la mar en coche."><meta name="keywords" content="tecnologia, linux, perl, git, libre, español, administrador, seo, web, internet, redes, free, programación, coding"><link rel="shortcut icon" href="favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="css/coso.css">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head><body>
+<div><a href="index.html">Volver</a></div><h1>Pandoc y vim como entorno de escritura.</h1>
+
+<h2>Configuraciones para vim</h2>
+
+<p>Personalmente, prefiero escribir en <strong>vim</strong>. Casi todo lo que escribo hoy por
+hoy, sale de vim.</p>
+
+<p><img src="/data/vim_limpiador.jpg" alt="VIM es una marca de lavandina -o algo así- en mi país" /></p>
+
+<p><em>Bueno, me refería al editor de texto...</em></p>
+
+<p>En lo que se refiere configuraciones, me gusta que automáticamente
+rompa la linea mientras escribo para evitar saltos de lineas o formateo
+innecesario después de escribir el párrafo.</p>
+
+<p>Eso se puede conseguir poniendo en el <strong>.vimrc</strong> algo mas o menos como esto:</p>
+
+<pre><code>" Hacer que la linea se vaya rompiendo al llegar a las 80 columnas
+autocmd FileType  markdown  set textwidth=80
+autocmd FileType  markdown  set formatoptions+=t
+</code></pre>
+
+<p>Tengo agrupados algunos otros comandos relacionados con las correcciones para
+algunos tipos de archivo, que pueden ser útiles también:</p>
+
+<pre><code>" (Giladas pa escribir mas felizmente) 
+augroup writer_Goodies
+    autocmd FileType  markdown  set spell
+    autocmd FileType  markdown  set spelllang=es
+    autocmd FileType  markdown  set textwidth=80
+    autocmd FileType  markdown  set formatoptions+=t
+    autocmd FileType  vimwiki   set spell
+    autocmd FileType  vimwiki   set spelllang=es
+    autocmd FileType  text      set spell
+    autocmd FileType  text      set spelllang=es
+augroup END
+</code></pre>
+
+<h2>Formateame el párrafo</h2>
+
+<p>Formatear el párrafo es simple, vim tiene un "formateador" interno. Con <strong>gq</strong>
+en modo línea visual (SHIFT + v), alcanza para formatear la selección.</p>
+
+<p>Con <strong>gqip</strong> en modo normal se formatea todo el párrafo, sin necesidad de
+selección.</p>
+
+<h2>par</h2>
+
+<p>En general, la mejor idea es utilizar <strong>par</strong> que ostenta opciones mas
+inteligentes en aspectos como el manejo de citas, textos anidados y estilizar
+acorde a formatos predefinidos; es mas, es capaz de tomar decisiones por sobre
+el manejo de los espacios en blanco entre párrafos...</p>
+
+<p>Por si no queda claro, <a href="http://nicemice.net/par/">par</a> es un programa para Linux
+y no se cuántos sistemas operativos mas, que sigue la filosofía del diseño de
+aplicaciones Unix:</p>
+
+<pre><code>Do one thing and do it well.  
+(Hacé una cosa y hacela bien.)
+</code></pre>
+
+<p>Para "bypassear" el formateador interno y reemplazarlo con par, alcanza con:</p>
+
+<pre><code>:set equalprg=par
+</code></pre>
+
+<p>Vean la ayuda en vim, tiene muchas mas posibilidades que las pocas que yo enumero
+acá:</p>
+
+<pre><code>:help formatting
+</code></pre>
+
+<h2>Pandoc</h2>
+
+<p><a href="http://pandoc.org">Pandoc</a> es un programa hecho en
+<a href="https://www.haskell.org">Haskell</a> que convierte entre muchos formatos de texto.
+Es de lo mejorcito en el tema, casi sin comparación.</p>
+
+<p>Es un proyecto <a href="http://pandoc.org/README.html">muy bien documentado</a>. Tiene
+paginas man también y generalmente se instala a través de <strong>cabal</strong> (la forma
+que recomiendo).  Cabal es el gestor de paquetes del lenguaje Haskell.</p>
+
+<h2>Con la ayuda de make</h2>
+
+<p>Como esqueleto tengo un archivo <strong>make</strong> para convertir un archivo markdown a
+diferentes formatos de salida; muy a menudo lo termino copiando en la carpeta desde
+la que escribo.</p>
+
+<p>No necesariamente es igual de necesaria la salida en todos esos formatos: a
+menudo solamente quiero el pdf o html. Sin embargo, están ahí disponibles...</p>
+
+<pre><code>all: pdf odt html latex rtf manpage asciidoc opendocument
+
+pdf: 
+    pandoc doc_src.md -o doc.pdf
+
+odt:
+    pandoc -s doc_src.md -o doc.odt
+
+html:
+    pandoc -s doc_src.md -o doc.html
+
+latex:
+    pandoc -s doc_src.md -o doc.tex
+
+rtf:
+    pandoc -s doc_src.md -o doc.rtf
+
+manpage:
+    pandoc -t man -s doc_src.md -o doc.1
+
+asciidoc:
+    pandoc -s -S doc_src.md -t asciidoc -o doc.txt
+
+opendocument:
+    pandoc doc_src.md -s -t opendocument -o doc.xml
+
+clean:
+    rm doc.pdf doc.html doc.odt doc.tex doc.1 doc.rtf doc.xml doc.txt
+</code></pre>
+
+<p>Por si interesa, habría que copiar el código anterior y bautizar el nuevo
+archivo como <strong>Makefile</strong> (sin extensión). Seguramente <strong>make</strong>, uno de los
+programas mas antiguos y venerables del entorno *nix, ya esté disponible. Editar
+a gusto las saidas y formatos (probablemente rtf no sea tan útil como pdf o
+html).</p>
+
+<p>El makefile busca un archivo llamado "doc_src.md" y realiza las conversiones en
+los formatos listados arriba. Usarlo es fácil, simplemente hay que entrar en el
+directorio y:</p>
+
+<pre><code>make
+</code></pre>
+
+<p>eso es todo...</p>
+
+<p>Recomiendo hacerse amigo de <strong>make</strong> que no solamente es funcional para los
+programadores en C...</p>
+
+
+<div id="disqus_thread"></div><script>
+    var disqus_config = function () {
+        this.page.url = "https://3456.com.ar";
+        this.page.identifier = "3456";
+    };
+    (function() { 
+        var d = document, s = d.createElement("script");
+        s.src = "https://3456.disqus.com/embed.js"; 
+        s.setAttribute("data-timestamp", +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>JavaScript es necesario para ver los <a href="https://disqus.com/?ref_noscript" rel="nofollow">comentarios.</a></noscript>
+<div><a href="index.html">Volver</a></div><span>Última modificación: 16-marzo-2016 16:45 by <strong>MarxBro</strong>.<a href="http://www.wtfpl.net/"><img src="/data/wtfpl.png" alt="MarxBro. WTFPL-2016" /></a></span></body></html>
