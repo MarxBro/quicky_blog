@@ -16,6 +16,15 @@ que no suelen ser parte del core (pero que se instalan fácil con [cpanp](/cpanp
 * List::MoreUtils
 * File::Slurp
 
+## TODO
+
+Sería una buena idea prescindir de File::Slurp y List::MoreUtils en un futuro.
+
+File::Find::Rule también, pero por lo fácil y liviano que es y lo que hace, no le veo 
+mucho futuro a la idea.
+
+Por ahora, debuguear es suficiente.
+
 ## ¿Qué es lo que hace?
 
 Básicamente, genera páginas HTML en base a archivos markdown y las indexa.
@@ -50,13 +59,33 @@ ahí).
 
 Es más seguro ya que no hay código expuesto (con la excepción de disqus).
 
-Y por último, es __suficiente__ para lo que quiero decir, tengo en mente y
-espero de este proyecto.
+Y por último, es __suficiente__ para lo que quiero decir, tengo en mente y espero de este proyecto.
+
+## ¿Y el css?
+
+Está ahí...
+
+Armalo como mas te guste y ponelo adentro de __src__. 
+Lo va a copiar a la carpeta donde está todo.
+
+El ejemplo del repo es lo que uso en la página que estás leyendo...
+
+## ¿Y es rápido?
+
+Sep...
+
+Para optimizar todo un poco, hice que agregue un __.htaccess__ 
+con compresión y control del tiempo de expiración (el famoso "mod expires") en la carpeta final.
+
+Me quedaría agregarle algo equivalente para __nginx__, pero como es estático, este asunto en 
+particular no me representa ninguna prioridad (la carpeta final pesa como 2Kb, 
+comprimido es la mitad, no se si tiene sentido optimizarlo más).
+
 
 ## ¿Es responsive?
 
-Una página en HTML plano con el menor css posible, sin artificios de
-imágenes en el fondo, fuentes o recursos "jquerísticos" adicionales suena 
+Una página en HTML plano con el menor css posible, sin artificios de imágenes 
+en el fondo, fuentes o recursos "jquerísticos" adicionales suena 
 [lo suficientemente responsive](http://motherfuckingwebsite.com).
 
 

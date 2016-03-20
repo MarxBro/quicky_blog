@@ -56,7 +56,8 @@ my %linky       = ();
 
 # Un pie al final de cada página
 my $pie_html    = '<span>' . 'Última modificación: ' . 
-                    $t_manzan . ' by <strong>MarxBro</strong>.' . '</span>';
+                    $t_manzan . ' by <strong>MarxBro</strong>.' . '<a href="http://www.wtfpl.net/"><img src="/data/wtfpl.png" alt="MarxBro. WTFPL-2016" /></a>'
+                     . '</span>';
 
 #Favicon: Previene el error 404
 my $favico_link_para_header = '<link rel="shortcut icon" href="favicon.ico"/>';
@@ -69,7 +70,47 @@ my @keywords_fixed = ( qw /tecnologia linux perl git libre español administrado
 my $blog_autores = '"MarxBro"';
 my $blog_desc = '"Blog personal acerca de linux, perl, tecnologías libre y la mar en coche."';
 
+my $apache_target= 1; # poner en 0 si el servidor en nginx u otro.
+my $htaccess = <<EOF
+# Fijarse que el directorio desde donde se sirve el contenido tenga:
+# AllowOverride All, o nada de esto va a andar.
+Options -Indexes -FollowSymLinks
 
+# compresion 
+<ifModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+</ifModule>
+
+# cachetear
+<ifModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/gif "access plus 1 months"
+  ExpiresByType image/jpg "access plus 1 months"
+  ExpiresByType image/jpeg "access plus 1 months"
+  ExpiresByType image/png "access plus 1 months"
+  ExpiresByType image/vnd.microsoft.icon "access plus 1 months"
+  ExpiresByType image/x-icon "access plus 1 months"
+  ExpiresByType image/ico "access plus 1 months"
+  ExpiresByType application/javascript "now plus 1 months"
+  ExpiresByType application/x-javascript "now plus 1 months"
+  ExpiresByType text/javascript "now plus 1 months"
+  ExpiresByType text/css "now plus 1 months"
+  ExpiresDefault "access plus 1 days"
+</ifModule>
+
+EOF
+;
+
+
+my $div_return_home = '<div><a href="index.html">Volver</a></div>';
 
 my $exitos = "Todo anduvo joya; en la carpeta " . $dir_build . " esta el blog.";
 
@@ -154,12 +195,13 @@ sub build {
         my $ultima_modificacion = $ii_[9];
         my $contenido = $header_with_css;
         $contenido .= '<body>' . "\n";
+        $contenido .= $div_return_home;
         $contenido .= markdown($shit) . "\n";
         if ($comments_allow){
             my $comments = embed_comments();
             $contenido .= $comments;
         }
-        $contenido .= '<div><a href="index.html">Volver</a></div>';
+        $contenido .= $div_return_home;
         $contenido .= pie();
         my ($titulo_page,$titulo_index) = make_title($shit);
         my $nombre_archivo_final = $dir_build . '/' . $titulo_page . '.html';
@@ -176,6 +218,7 @@ sub build {
     $indexin .= do_index();
     my $indexin_file_nombre = $dir_build . '/index.html';
     write_file( $indexin_file_nombre , optimize($indexin,0) );
+    do_htaccess();
 }
 
 sub do_SEOand_shut_up{
@@ -201,7 +244,7 @@ sub do_index {
     # Agregado: Ordenar la table por fecha, desc
     foreach my $n_html_page (reverse(sort { $linky{$a} <=> $linky{$b} } keys %linky)){
         my ($modif,$l) = split(/spliteo/, $linky{$n_html_page});
-        my $modifiz = strftime ("%d-%B-%Y",localtime( $modif ));
+        my $modifiz = strftime ("%d - %B - %Y ~  %H:%M",localtime( $modif ));
         my $lllll    = '<tr><td>' .
             '<a href="' . $n_html_page . '" >' . $l . 
             '</a>' . '</td><td>' . $modifiz . '</td>' .
@@ -272,6 +315,8 @@ sub index_datas {
         $md .= $_;
     }
     my $coso = markdown($md);
+    $coso =~ s#<h1>#<header><h1>#;
+    $coso =~ s#</h2>#</h2></header>#;
     return $coso;
 }
 
@@ -316,6 +361,12 @@ sub embed_comments {
     return $comments;
 }
 
+sub do_htaccess {
+    my $ht_nn = $dir_build . '/.htaccess' ;
+    write_file($ht_nn,$htaccess);
+    chmod 0755, $ht_nn;
+}
+
 ######################################################################
 #                                                       P O D  Z O N E
 ######################################################################
@@ -334,11 +385,11 @@ __DATA__
 
 # 3456
 
-Hola este un blog personal... o algo así. 
+## Este un blog personal... o algo así.
 
 Me acostumbré a firmar como __MarxBro__ y eso no creo que cambie en un futuro cercano.
 
-Acá escribo lo que me va pareciendo relevante o simplemente, lo que tengo ganas de escribir.
+Acá escribo lo que me va pareciendo relevante o simplemente, lo que tengo ganas de escribir. 
 No es gran cosa y responde casi exclusivamente a mis caprichos informáticos (sobre Perl, Linux y lo que vaya apareciendo).
 
 Mi perfil en github y mis repositorios están [a su disposición](https://github.com/MarxBro).
@@ -347,6 +398,6 @@ Dejen un comentario si tienen algo que decirme, corregirme, putearme, etc.
 
 La página se llama así porque __re-pintó__ y está hecha en bas a un CMS que hice por ahí.
 
-Abajo hay una lista de las cosas que voy escribiendo.
+Abajo hay una lista de las cosas que voy escribiendo y reescribiendo.
 
 ## Entradas:
