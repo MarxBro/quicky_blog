@@ -26,12 +26,11 @@ Después se me ocurrió que iba a ser mucho más feliz si ponía el número que 
 
 !["tercer intento de ploteo"](/data/pi_nros.png)
 
-Un último intento, simple y más útil: únicamente escribe el número si es la
- primera vez que éste aparece en la serie...
+Un último intentio: únicamente escribe el número si es la primera vez que éste aparece en la serie...
 
 !["cuarto intento de ploteo"](/data/pi_nros_unicos.png)
 
-Hmmm... poco util.
+Hmmm... poco útil.
 
 ## ¿Conclusiones?
 
@@ -45,6 +44,6 @@ Las conclusiones se las dejo a los matemáticos y la _data visualization_ es muc
 
 Subí esta cosa a [github](https://github.com/MarxBro/pi_plot) por si hay algún remoto interés...
 
-Si alguien tiene ganas de _paletear la idea mas estśticamente_, es __mas que
+Si alguien tiene ganas de _paletear la idea mas estéticamente_ es __mas que
  bienvenido__.
 
