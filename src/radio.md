@@ -22,4 +22,4 @@ Esta en el master del mismo proyecto, y el branch en el que estuve jugando se
 !["Una interfaz para la radio"](/data/radio_gui.png)
 
 No es gran cosa, sale de un ejemplo de la documentación oficial de ncurses y
- es un menú buffer con título y descripción que _ejecuta__mplayer__ de fondo_.
+ es un menú buffer con título y descripción que _ejecuta mplayer de fondo_.
