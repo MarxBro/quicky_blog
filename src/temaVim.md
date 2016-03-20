@@ -11,17 +11,15 @@ Agregué un cambio de fg para el formato POD (documentación de Perl).
 
 Para debuggear y agregar definiciones de colores, se puede usar algo así.
 
-```vimscript
-" Mostar a que grupo de sintaxis corresponde
-" con shit + Ctrl + P
-nmap <C-S-P> :call <SID>SynStack()<CR>
-function! <SID>SynStack()
-	if !exists("*synstack")
-		return
-	endif
-	echo map(synstack(line('.'), col('.')),'synIDattr(v:val, "name")')
-endfunc
-```
+    " Mostar a que grupo de sintaxis corresponde
+    " con shit + Ctrl + P
+    nmap <C-S-P> :call <SID>SynStack()<CR>
+    function! <SID>SynStack()
+        if !exists("*synstack")
+            return
+        endif
+        echo map(synstack(line('.'), col('.')),'synIDattr(v:val, "name")')
+    endfunc
 
 > Esta idea la saqué de un vimcast.
 
