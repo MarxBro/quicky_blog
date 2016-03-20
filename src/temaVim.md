@@ -25,7 +25,7 @@ Para debuggear y agregar definiciones de colores, se puede usar algo así.
 
 Se ve más o menos así:
 
-!["Ejemplo de como se ve en mi netbook"](/data/vt.png/)
+!["Ejemplo de como se ve en mi netbook"](/data/vt.png)
 
 En el ejemplo se ven las ideas principales (que responden a mis preferencias):
 
