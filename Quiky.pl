@@ -66,9 +66,9 @@ my $favico_link_para_header = '<link rel="shortcut icon" href="favicon.ico"/>';
 my $comments_allow = 1; # Cambiar variables en la funcion embed_comments();
 
 # S E O ( o algo asi )
-my @keywords_fixed = ( qw /tecnologia linux perl git libre español administrador seo web internet redes free programación coding/ );
+my @keywords_fixed = ( qw /perl hack tecnologia vim linux git libre español administrador web redes free programación coding cool pi/ );
 my $blog_autores = '"MarxBro"';
-my $blog_desc = '"Blog personal acerca de linux, perl, tecnologías libre y la mar en coche."';
+my $blog_desc = '"Blog personal acerca de linux, perl, tecnologías libres y la mar en coche."';
 
 my $apache_target= 1; # poner en 0 si el servidor en nginx u otro.
 my $htaccess = <<EOF
@@ -185,14 +185,15 @@ sub build {
                                 $nombre_css_final_l . '">';
         $css_header_links .= $link_final_css . "\n";
     }
-    my $header_with_css = make_header ($css_header_links);
     
     my @Indexes = ();
     foreach my $page (@pages){
         my $shit = read_file($page);
-        #my $dinamic_keys = get_keywords($shit); # no tenemos uso tdv
         my @ii_ = stat($page);
         my $ultima_modificacion = $ii_[9];
+        my ($titulo_page,$titulo_index) = make_title($shit);
+        my $dinamic_keys = '<meta name="keywords" content="' . get_keywords($titulo_index) . '">'; # keywords from title.
+        my $header_with_css = make_header ($css_header_links,$dinamic_keys);
         my $contenido = $header_with_css;
         $contenido .= '<body>' . "\n";
         $contenido .= $div_return_home;
@@ -203,7 +204,6 @@ sub build {
         }
         $contenido .= $div_return_home;
         $contenido .= pie();
-        my ($titulo_page,$titulo_index) = make_title($shit);
         my $nombre_archivo_final = $dir_build . '/' . $titulo_page . '.html';
         my $nombre_archivo_final_l = $titulo_page . '.html';
         $linky{$nombre_archivo_final_l} = $ultima_modificacion . 'spliteo' . $titulo_index;
@@ -212,7 +212,7 @@ sub build {
 
 
 # I N D E X
-    my $indexin = $header_with_css;
+    my $indexin = make_header ($css_header_links);
     $indexin .= '<body>';
     $indexin .= index_datas();
     $indexin .= do_index();
@@ -231,11 +231,12 @@ sub do_SEOand_shut_up{
 }
 
 sub get_keywords {
-    # a keywords is anything longer than 5 caracters. 
+    # a keyword is anything longer than 4 caracters within the main title.
     my $inputo = $_[0];
-    my @words = split(/\s+/,$inputo);
-    my @words_b = map { $_ =~ /\W+(\w+)\W+/gi ? length ($1) >= 5 ?  $1 : () : () } uniq(@words);
-    my $cdeJu = join (', ',@words_b);
+    my @words = split(/ /,$inputo);
+    my @words_b = map { length ($_) >= 4 ?  $_ : () } uniq(@words);
+    my $cdeJu = join (',',@words_b);
+    $cdeJu=~ s/:!?//g;
     return $cdeJu;
 }
 
@@ -263,9 +264,15 @@ sub pie{
 
 sub make_header {
     my $in = $_[0];
+    my $in_2 = $_[1];
     my $fucking_utf = '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>' . "\n";
     my $fucking_seo = do_SEOand_shut_up();
-    my $H = '<!doctype html><head>' . $fucking_seo . $favico_link_para_header . "\n" . $in . "\n" . $fucking_utf . '</head>';
+    my $H;
+    if ($in_2){
+        $H = '<!doctype html><head>' . $fucking_seo . $favico_link_para_header . "\n" . $in . $in_2 . "\n" . $fucking_utf . '</head>';
+    } else {
+        $H = '<!doctype html><head>' . $fucking_seo . $favico_link_para_header . "\n" . $in . "\n" . $fucking_utf . '</head>';
+    }
     return $H;    
 }
 
