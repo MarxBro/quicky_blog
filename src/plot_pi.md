@@ -57,6 +57,14 @@ El resultado es un poco mas lindo a mis ojos, pero sobre gustos no hay nada
 
 !["intento con paleta personal"](/data/pi_M.png)
 
+# Un poco más...
+
+Agarrando 500 decimales, ya alcanzaba, pero ¿qué pasa si uso 10,000? __Lo mismo__...
+
+!["intento con paleta personal"](/data/pi_M_10000.png)
+
+Estaría bueno cambiar los colores por algunos de mejor gusto... :P
+
 ## ¿Conclusiones?
 
 Las conclusiones se las dejo a los matemáticos y la _data visualization_ es mucho
