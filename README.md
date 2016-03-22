@@ -16,3 +16,7 @@ Los archivos para descargar van en la carpeta "src/dwns" y se vinculan desde ah√
 mediante el markdown (a.k.a links).
 
 Creo que no va a soportar mucho mas.
+
+## Disqus
+
+Crear un foro con el nombre de la pagina que el sistema se encarga de crear los threads que sean necesarios!
