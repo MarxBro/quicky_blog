@@ -344,7 +344,7 @@ sub embed_comments {
     my $id_disqus = $_[0];
     my $id_this_url = $_[0];
     my $disqus_page_url         = q|'| . "https://3456.com.ar/" . $id_this_url . '.html' . q|.| ;
-    my $disqus_identifier       = q|'"| . $id_disqus . q|"'| ;
+    my $disqus_identifier       = '"3456"' ;
     my $disqus_forum_shortname  = 3456;
 
     my $comments = '
