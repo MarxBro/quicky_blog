@@ -199,7 +199,7 @@ sub build {
         $contenido .= $div_return_home;
         $contenido .= markdown($shit) . "\n";
         if ($comments_allow){
-            my $comments = embed_comments();
+            my $comments = embed_comments($titulo_page);
             $contenido .= $comments;
         }
         $contenido .= $div_return_home;
@@ -341,8 +341,9 @@ sub optimize {
 
 
 sub embed_comments {
+    my $id_disqus = shift;
     my $disqus_page_url         = '"https://3456.com.ar"' ;
-    my $disqus_identifier       = '"3456"';
+    my $disqus_identifier       = q|'"| . $id_disqus . q|"'| ;
     my $disqus_forum_shortname  = 3456;
 
     my $comments = '
