@@ -3,6 +3,18 @@
 Sin aparente razón o propósito mayor, se me ocurrió "plotear" 
 (hacer un gráfico de) algunos decimales de pi.
 
+## ¿Cómo obtener los decimales de pi en perl?
+
+En general, no hice mucha matemática aplicada ni magia para obtenerlos: _usé
+ la función pi de la librería bignum_, hice trampa...
+
+Es más o menos así:
+
+    perl -Mbignum -E 'say bignum::bpi(500)'
+
+Lo que está arriba es un poco la génesis de todo, _obtener X decimales de pi con
+ un comando_.
+
 Abajo están los que usé. Incluye el 3 inicial y redondeado a 500
 cifras. No debería romperse el formato, son diez líneas de cincuenta dígitos
  cada una:
@@ -18,11 +30,22 @@ cifras. No debería romperse el formato, son diez líneas de cincuenta dígitos
     43305727036575959195309218611738193261179310511854
     80744623799627495673518857527248912279381830119491
 
+Hay fórmulas matemáticas brillantes para obtener los dígitos de _pi_,
+ una de las más célebres se la debemos a __Ramanujuan__ (arriba en la imagen que
+ sigue) y una aproximación mucho más precisa (que rompió el récord de cifras encontradas) es
+ creación de los hermanos __Chudnovsky__ (abajo)
+
+!["Fórmulas para obtener decimales de pi de matemáticos brillantes"](/data/ramchu.png)
+
+Me queda como materia pendiente, plotear pi mediante esas fórmulas para ver los
+ diferentes resultados... __Es una promesa__.
+
+## ¿Cómo se ve el resultado?
+
 El programa es bastante tosco y simple, es un script (obviamente en perl) 
  que básicamente ilustra los primeros 500 decimales de pi usando _Imager_ y
  _bignum_.
 
-## ¿Cómo se ve el resultado?
 
 Algo así fue en su primer intento:
 
@@ -57,7 +80,41 @@ El resultado es un poco mas lindo a mis ojos, pero sobre gustos no hay nada
 
 !["intento con paleta personal"](/data/pi_M.png)
 
+## ¿Y con un único valor?
+
+Claro, esto es o que se viene... todos lo sabiamos.
+
+¿Qué gráfico se obtiene si graficamos solo los unos, dos ... y el resto en
+ blanco? Algo mas o menos así (ordenados de 0 a 9, de arriba hacia abajo):
+
+!["solo 0s"](/data/0pi.png)
+
+!["solo 1s"](/data/1pi.png)
+
+!["solo 2s"](/data/2pi.png)
+
+!["solo 3s"](/data/3pi.png)
+
+!["solo 4s"](/data/4pi.png)
+
+!["solo 5s"](/data/5pi.png)
+
+!["solo 6s"](/data/6pi.png)
+
+!["solo 7s"](/data/7pi.png)
+
+!["solo 8s"](/data/8pi.png)
+
+!["solo 9s"](/data/9pi.png)
+
+Se pueden ver claramente varias cosas, que no necesariamente significan nada
+ (estamos jugando a la matemática un poco):
+
 ## ¿Conclusiones?
+
+Todo lo anterior es una idea, una inquietud y un poco de trabajo, ínfimo en
+comparación con el que hacen los matemáticos en el día a día: la idea de todo
+esto es, como dije antes, jugar a la matemática -un poco-.
 
 Las conclusiones se las dejo a los matemáticos y la _data visualization_ es mucho
  mejor con la ayuda de algún diseñador, aunque (en palabras del maestro):
