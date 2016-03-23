@@ -110,7 +110,7 @@ Claro, esto es o que se viene... todos lo sabiamos.
 
 Se pueden ver claramente varias cosas, que no necesariamente significan nada
  (estamos jugando a la matemática un poco):
-=======
+
 # Un poco más...
 
 Agarrando 500 decimales, ya alcanzaba, pero ¿qué pasa si uso 10,000? __Lo mismo__...
@@ -118,7 +118,6 @@ Agarrando 500 decimales, ya alcanzaba, pero ¿qué pasa si uso 10,000? __Lo mism
 !["intento con paleta personal"](/data/pi_M_10000.png)
 
 Estaría bueno cambiar los colores por algunos de mejor gusto... :P
->>>>>>> f9d7f4041315579c9988de427c5a3236c8d03653
 
 ## ¿Conclusiones?
 
