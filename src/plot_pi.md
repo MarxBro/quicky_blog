@@ -111,6 +111,11 @@ Claro, esto es o que se viene... todos lo sabiamos.
 Se pueden ver claramente varias cosas, que no necesariamente significan nada
  (estamos jugando a la matemática un poco):
 
+* El mayor grupo de decimales repetidos (dentro de los primeros 10000) es de 4.
+* Las líneas verticales solo aparecen por la dispocisión, así que no significan
+  mucho; de todos modos, aparecen muchas...
+* Aparecen algunas piezas del tetris en el 8 :P
+
 # Un poco más...
 
 Agarrando 500 decimales, ya alcanzaba, pero ¿qué pasa si uso 10,000? __Lo mismo__...
