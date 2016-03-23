@@ -80,12 +80,11 @@ El resultado es un poco mas lindo a mis ojos, pero sobre gustos no hay nada
 
 !["intento con paleta personal"](/data/pi_M.png)
 
-<<<<<<< HEAD
 ## ¿Y con un único valor?
 
-Claro, esto es o que se viene... todos lo sabiamos.
+Claro, esto es lo que se viene... todos lo sabíamos.
 
-¿Qué gráfico se obtiene si graficamos solo los unos, dos ... y el resto en
+¿Qué gráfico se obtiene si tomamos solo los unos, dos ... y el resto en
  blanco? Algo mas o menos así (ordenados de 0 a 9, de arriba hacia abajo):
 
 !["solo 0s"](/data/0pi.png)
@@ -112,7 +111,7 @@ Se pueden ver claramente varias cosas, que no necesariamente significan nada
  (estamos jugando a la matemática un poco):
 
 * El mayor grupo de decimales repetidos (dentro de los primeros 10000) es de 4.
-* Las líneas verticales solo aparecen por la dispocisión, así que no significan
+* Las líneas verticales solo aparecen por la disposición, así que no significan
   mucho; de todos modos, aparecen muchas...
 * Aparecen algunas piezas del tetris en el 8 :P
 
