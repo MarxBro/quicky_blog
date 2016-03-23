@@ -80,7 +80,15 @@ El resultado es un poco mas lindo a mis ojos, pero sobre gustos no hay nada
 
 !["intento con paleta personal"](/data/pi_M.png)
 
-## ¿Y con un único valor?
+# Un poco más...
+
+Agarrando 500 decimales, ya alcanzaba, pero ¿qué pasa si uso 10,000? __Lo mismo__...
+
+!["intento con paleta personal"](/data/pi_M_10000.png)
+
+Estaría bueno cambiar los colores por algunos de mejor gusto... :P
+
+## ¿Y con 10000 y un único valor?
 
 Claro, esto es lo que se viene... todos lo sabíamos.
 
@@ -115,13 +123,6 @@ Se pueden ver claramente varias cosas, que no necesariamente significan nada
   mucho; de todos modos, aparecen muchas...
 * Aparecen algunas piezas del tetris en el 8 :P
 
-# Un poco más...
-
-Agarrando 500 decimales, ya alcanzaba, pero ¿qué pasa si uso 10,000? __Lo mismo__...
-
-!["intento con paleta personal"](/data/pi_M_10000.png)
-
-Estaría bueno cambiar los colores por algunos de mejor gusto... :P
 
 ## ¿Conclusiones?
 
