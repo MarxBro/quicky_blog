@@ -31,7 +31,7 @@ cifras. No debería romperse el formato, son diez líneas de cincuenta dígitos
     80744623799627495673518857527248912279381830119491
 
 Hay fórmulas matemáticas brillantes para obtener los dígitos de _pi_,
- una de las más célebres se la debemos a __Ramanujuan__ (arriba en la imagen que
+ una de las más célebres se la debemos a __Ramanujan__ (arriba en la imagen que
  sigue) y una aproximación mucho más precisa (que rompió el récord de cifras encontradas) es
  creación de los hermanos __Chudnovsky__ (abajo)
 
