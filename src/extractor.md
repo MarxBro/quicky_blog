@@ -163,6 +163,6 @@ Generalmente, no lo uso. La mayoría de las cosas que bajo son del tipo
  __tar.gz__, aunque eso no significa que eventualmente encuentr algún archivo
  interesante para descomprimir y no me acuerde bien cómo era...
 
- ![XKCD](http://imgs.xkcd.com/comics/tar.png)
+ ![XKCD](https://imgs.xkcd.com/comics/tar.png)
 
 
