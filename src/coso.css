@@ -11,8 +11,9 @@ body {
     max-width:1900px;
     }
 h1 { text-align: left; color: #515151;}
+h2 { text-align: left; color: #515151;}
 /*h1 { text-align: left; color: #365566;}*/
-h2 { text-align: left; }
+/*h2 { text-align: left; }*/
 h3 { text-align: left; }
 h4 { text-align: left; }
 h5 { text-align: left; }
