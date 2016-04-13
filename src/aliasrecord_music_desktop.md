@@ -24,4 +24,4 @@ Podrían no andar igual de bien en todos los casos...
 
 En general, ilustran un poco el poder de herramientas como __ffmpeg__ y __mplayer__.
 
-Para capturar la pnatalla, existe __scrot__.
+Para capturar la pantalla, existe __scrot__.
