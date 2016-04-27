@@ -26,7 +26,7 @@ Script para bloggear como un enfermo.
 =cut
 
 my $t_banana = strftime ("%d_%B_%Y_%H_%M_%S",localtime(time()));
-my $t_manzan = strftime ("%d-%B-%Y %H:%M",localtime(time()));
+my $t_manzan = mes_bien_pese_a_locales(strftime ("%d-%B-%Y %H:%M",localtime(time())));
 
 =pod
 
