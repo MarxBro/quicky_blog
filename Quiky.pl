@@ -245,7 +245,7 @@ sub do_index {
     # Agregado: Ordenar la table por fecha, desc
     foreach my $n_html_page (reverse(sort { $linky{$a} <=> $linky{$b} } keys %linky)){
         my ($modif,$l) = split(/spliteo/, $linky{$n_html_page});
-        my $modifiz = strftime ("%d - %B - %Y ~  %H:%M",localtime( $modif ));
+        my $modifiz = mes_bien_pese_a_locales(strftime ("%d - %B - %Y ~  %H:%M",localtime( $modif )));
         my $lllll    = '<tr><td>' .
             '<a href="' . $n_html_page . '" >' . $l . 
             '</a>' . '</td><td>' . $modifiz . '</td>' .
@@ -376,6 +376,23 @@ sub do_htaccess {
     my $ht_nn = $dir_build . '/.htaccess' ;
     write_file($ht_nn,$htaccess);
     chmod 0755, $ht_nn;
+}
+
+sub mes_bien_pese_a_locales {
+    my $mes = shift;
+    $mes =~ s/January/Enero/g;
+    $mes =~ s/February/Febrero/g;
+    $mes =~ s/March/Marzo/g;
+    $mes =~ s/April/Abril/g;
+    $mes =~ s/May/Mayo/g;
+    $mes =~ s/June/Junio/g;
+    $mes =~ s/July/Julio/g;
+    $mes =~ s/August/Agosto/g;
+    $mes =~ s/September/Septiembre/g;
+    $mes =~ s/October/Octubre/g;
+    $mes =~ s/November/Noviembre/g;
+    $mes =~ s/December/Diciembre/g;
+    return $mes;
 }
 
 ######################################################################

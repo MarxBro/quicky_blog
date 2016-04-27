@@ -20,3 +20,10 @@ Creo que no va a soportar mucho mas.
 ## Disqus
 
 Crear un foro con el nombre de la pagina que el sistema se encarga de crear los threads que sean necesarios!
+
+## El tiempo cambia todo...
+
+Hay unas cuantas opciones que no hacen del todo feliz la adaptación de este engine en un blog por separadao...
+
+Me quedaría limpiarlo y convertirlo en algo mas general (como para ocmpartirlo con el mundo). Pero por el
+ momento no hay mucho interés y se queda así. _Avísenme si es requerido por alguien!_
