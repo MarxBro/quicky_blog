@@ -1,0 +1,175 @@
+<!doctype html><head><meta name="author" content="MarxBro"><meta name="description" content="Blog personal acerca de linux, perl, tecnologías libres y la mar en coche."><meta name="keywords" content="perl, hack, tecnologia, vim, linux, git, libre, español, administrador, web, redes, free, programación, coding, cool, pi"><link rel="shortcut icon" href="favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="css/coso.css">
+<meta name="keywords" content="Ploteando,decimales">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head><body>
+<div><a href="index.html">Volver</a></div><h1>Ploteando los decimales de Pi</h1>
+
+<p>Sin aparente razón o propósito mayor, se me ocurrió "plotear" 
+(hacer un gráfico de) algunos decimales de pi.</p>
+
+<h2>¿Cómo obtener los decimales de pi en perl?</h2>
+
+<p>En general, no hice mucha matemática aplicada ni magia para obtenerlos: <em>usé
+ la función pi de la librería bignum</em>, hice trampa...</p>
+
+<p>Es más o menos así:</p>
+
+<pre><code>perl -Mbignum -E 'say bignum::bpi(500)'
+</code></pre>
+
+<p>Lo que está arriba es un poco la génesis de todo, <em>obtener X decimales de pi con
+ un comando</em>.</p>
+
+<p>Abajo están los que usé. Incluye el 3 inicial y redondeado a 500
+cifras. No debería romperse el formato, son diez líneas de cincuenta dígitos
+ cada una:</p>
+
+<pre><code>31415926535897932384626433832795028841971693993751
+05820974944592307816406286208998628034825342117067
+98214808651328230664709384460955058223172535940812
+84811174502841027019385211055596446229489549303819
+64428810975665933446128475648233786783165271201909
+14564856692346034861045432664821339360726024914127
+37245870066063155881748815209209628292540917153643
+67892590360011330530548820466521384146951941511609
+43305727036575959195309218611738193261179310511854
+80744623799627495673518857527248912279381830119491
+</code></pre>
+
+<p>Hay fórmulas matemáticas brillantes para obtener los dígitos de <em>pi</em>,
+ una de las más célebres se la debemos a <strong>Ramanujan</strong> (arriba en la imagen que
+ sigue) y una aproximación mucho más precisa (que rompió el récord de cifras encontradas) es
+ creación de los hermanos <strong>Chudnovsky</strong> (abajo)</p>
+
+<p><img src="/data/ramchu.png" alt="&quot;Fórmulas para obtener decimales de pi de matemáticos brillantes&quot;" /></p>
+
+<p>Me queda como materia pendiente, plotear pi mediante esas fórmulas para ver los
+ diferentes resultados... <strong>Es una promesa</strong>.</p>
+
+<h2>¿Cómo se ve el resultado?</h2>
+
+<p>El programa es bastante tosco y simple, es un script (obviamente en perl) 
+ que básicamente ilustra los primeros 500 decimales de pi usando <em>Imager</em> y
+ <em>bignum</em>.</p>
+
+<p>Algo así fue en su primer intento:</p>
+
+<p><img src="/data/pi.png" alt="&quot;primer intento de ploteo&quot;" /></p>
+
+<p>Como no se de colores y no soy diseñador, elegí un único tono...</p>
+
+<p>Después me pintó cambiar justamente el tono en pasos hexadecimales y el
+ resultado ilustra un poco más la idea, aunque era bastante feo; decidí copiar
+ una paleta de colores que encontré por ahí y el resultado fue mas feo...</p>
+
+<p><img src="/data/pi_color.png" alt="&quot;segundo intento de ploteo&quot;" /></p>
+
+<p>Después se me ocurrió que iba a ser mucho más feliz si ponía el número que cada
+ color representaba en la imagen.</p>
+
+<p><img src="/data/pi_nros.png" alt="&quot;tercer intento de ploteo&quot;" /></p>
+
+<p>Un último intento: únicamente escribe el número si es la primera vez que éste aparece en la serie...</p>
+
+<p><img src="/data/pi_nros_unicos.png" alt="&quot;cuarto intento de ploteo&quot;" /></p>
+
+<p>Hmmm... No es el gráfico mas útil que hay, pero muestra como <strong>el cero tarda un
+rato en llegar</strong>. No termina siendo una gran revelación...</p>
+
+<p>Como se veía <em>mal</em> todavía, decidí armar una paleta personal para encariñarme un
+poco con los resultados que estoy produciendo (ja), 
+<a href="https://color.hailpixel.com/#FAF0F0,DBB294,D09471,C14A44,633621,3E4D19,1F5C50,123629,0A1D1F,2E0F24">acá está</a>.</p>
+
+<p>El resultado es un poco mas lindo a mis ojos, pero sobre gustos no hay nada
+ escrito...</p>
+
+<p><img src="/data/pi_M.png" alt="&quot;intento con paleta personal&quot;" /></p>
+
+<h1>Un poco más...</h1>
+
+<p>Agarrando 500 decimales, ya alcanzaba, pero ¿qué pasa si uso 10,000? <strong>Lo mismo</strong>...</p>
+
+<p><img src="/data/pi_M_10000.png" alt="&quot;intento con paleta personal&quot;" /></p>
+
+<p>Estaría bueno cambiar los colores por algunos de mejor gusto... :P</p>
+
+<h2>¿Y con 10000 y un único valor?</h2>
+
+<p>Claro, esto es lo que se viene... todos lo sabíamos.</p>
+
+<p>¿Qué gráfico se obtiene si tomamos solo los unos, dos ... y el resto en
+ blanco? Algo mas o menos así (ordenados de 0 a 9, de arriba hacia abajo):</p>
+
+<p><img src="/data/0pi.png" alt="&quot;solo 0s&quot;" /></p>
+
+<p><img src="/data/1pi.png" alt="&quot;solo 1s&quot;" /></p>
+
+<p><img src="/data/2pi.png" alt="&quot;solo 2s&quot;" /></p>
+
+<p><img src="/data/3pi.png" alt="&quot;solo 3s&quot;" /></p>
+
+<p><img src="/data/4pi.png" alt="&quot;solo 4s&quot;" /></p>
+
+<p><img src="/data/5pi.png" alt="&quot;solo 5s&quot;" /></p>
+
+<p><img src="/data/6pi.png" alt="&quot;solo 6s&quot;" /></p>
+
+<p><img src="/data/7pi.png" alt="&quot;solo 7s&quot;" /></p>
+
+<p><img src="/data/8pi.png" alt="&quot;solo 8s&quot;" /></p>
+
+<p><img src="/data/9pi.png" alt="&quot;solo 9s&quot;" /></p>
+
+<p>Se pueden ver claramente varias cosas, que no necesariamente significan nada
+ (estamos jugando a la matemática un poco):</p>
+
+<ul>
+<li>El mayor grupo de decimales repetidos (dentro de los primeros 10000) es de 4.</li>
+<li>Las líneas verticales solo aparecen por la disposición, así que no significan
+mucho; de todos modos, aparecen muchas...</li>
+<li>Aparecen algunas piezas del tetris en el 8 :P</li>
+</ul>
+
+<h2>¿Conclusiones?</h2>
+
+<p>Todo lo anterior es una idea, una inquietud y un poco de trabajo, ínfimo en
+comparación con el que hacen los matemáticos en el día a día: la idea de todo
+esto es, como dije antes, jugar a la matemática -un poco-.</p>
+
+<p>Las conclusiones se las dejo a los matemáticos y la <em>data visualization</em> es mucho
+ mejor con la ayuda de algún diseñador, aunque (en palabras del maestro):</p>
+
+<blockquote>
+  <p>"The nature of form in the digital age is trapped in the realm of code." </p>
+  
+  <blockquote>
+    <p>John Maeda.</p>
+  </blockquote>
+</blockquote>
+
+<h2>Código</h2>
+
+<p>Subí esta cosa a <a href="https://github.com/MarxBro/pi_plot">github</a> por si hay algún remoto interés...</p>
+
+<p>Si alguien tiene ganas de <em>paletear la idea mas estéticamente</em> es <strong>mas que
+ bienvenido</strong>.</p>
+
+<p>Hay muchas herramientas para generar paletas, yo (que no soy diseñador ni nada) 
+ usé <a href="https://color.hailpixel.com/">esta y la recomiendo</a>.</p>
+
+
+<div id="disqus_thread"></div><script>
+    var disqus_config = function () {
+        this.page.url = 'https://3456.com.ar/Ploteando_los_decimales_de_Pi.html';
+        this.page.identifier = '"3456-Ploteando_los_decimales_de_Pi"';
+    };
+    (function() { 
+        var d = document, s = d.createElement("script");
+        s.src = "https://3456.disqus.com/embed.js"; 
+        s.setAttribute("data-timestamp", +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>JavaScript es necesario para ver los <a href="https://disqus.com/?ref_noscript" rel="nofollow">comentarios.</a></noscript>
+<div><a href="index.html">Volver</a></div><span>Última modificación: 27-abril-2016 16:23 by <strong>MarxBro</strong>.<a href="http://www.wtfpl.net/"><img src="/data/wtfpl.png" alt="MarxBro. WTFPL-2016" /></a></span></body></html>

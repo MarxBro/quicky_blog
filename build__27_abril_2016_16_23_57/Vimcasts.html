@@ -1,0 +1,52 @@
+<!doctype html><head><meta name="author" content="MarxBro"><meta name="description" content="Blog personal acerca de linux, perl, tecnologías libres y la mar en coche."><meta name="keywords" content="perl, hack, tecnologia, vim, linux, git, libre, español, administrador, web, redes, free, programación, coding, cool, pi"><link rel="shortcut icon" href="favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="css/coso.css">
+<meta name="keywords" content="Vimcasts">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head><body>
+<div><a href="index.html">Volver</a></div><h1>Vimcasts</h1>
+
+<p>Hace poco redescubrí el libro de Drew Neil: <strong>"Practical Vim: Edit Text at the Speed of Thought (Pragmatic Programmers)"</strong> y 
+aprendí mucho mas sobre <em>macros</em> y <em>registros</em>. En general, no tengo mucho uso para ambas
+funciones en lo cotidiano, pero un poco de magia en vim salva el dia del tedio.</p>
+
+<p>El mismo autor tuvo una página en donde expllicaba como hacer ciertas cosas utilizando <strong>vim</strong>, en detalle y en video.
+Muy instructivo el proyecto...</p>
+
+<p>Buscando por ahí, vi que la página permite ver la lista json de los videos. Quiero creer que es voluntario y no un accidente u olvido...</p>
+
+<p>De cualquier forma, me los bajé todos con estos comandos:</p>
+
+<pre><code>mkdir vimcasts 
+cd vimcasts
+wget -O - http://media.vimcasts.org/videos/index.json 2&gt;/dev/null | grep url | awk -F'"' '{print $4}' &gt;&gt; lista
+wget -i lista
+</code></pre>
+
+<p>Calculo que se pueden encadenar así, pero no lo probé:</p>
+
+<pre><code>wget -O - http://media.vimcasts.org/videos/index.json 2&gt;/dev/null | grep url | awk -F'"' '{print $4}' | wget -i
+</code></pre>
+
+<p>La carpeta donde lo hice me quedó bastante desordenada. Me gustaría ordenarla por fecha de creación del archivo o algo así.
+Por suerte los videos están bien rotulados y el formato ogv es -para mi gusto personal- óptimo. Los renombré así:</p>
+
+<pre><code>for i in *ogv; do mv $i $(ls -l $i | awk '{print $6 "-" $7 "-" $8}')_$i; done
+</code></pre>
+
+<p>Recomiendo el libro mencionado anteriormente, de lo mejor que leí sobre vim y editores de texto en general.</p>
+
+
+<div id="disqus_thread"></div><script>
+    var disqus_config = function () {
+        this.page.url = 'https://3456.com.ar/Vimcasts.html';
+        this.page.identifier = '"3456-Vimcasts"';
+    };
+    (function() { 
+        var d = document, s = d.createElement("script");
+        s.src = "https://3456.disqus.com/embed.js"; 
+        s.setAttribute("data-timestamp", +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>JavaScript es necesario para ver los <a href="https://disqus.com/?ref_noscript" rel="nofollow">comentarios.</a></noscript>
+<div><a href="index.html">Volver</a></div><span>Última modificación: 27-abril-2016 16:23 by <strong>MarxBro</strong>.<a href="http://www.wtfpl.net/"><img src="/data/wtfpl.png" alt="MarxBro. WTFPL-2016" /></a></span></body></html>

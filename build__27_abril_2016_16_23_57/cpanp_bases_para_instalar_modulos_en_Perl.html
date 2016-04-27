@@ -1,0 +1,91 @@
+<!doctype html><head><meta name="author" content="MarxBro"><meta name="description" content="Blog personal acerca de linux, perl, tecnologías libres y la mar en coche."><meta name="keywords" content="perl, hack, tecnologia, vim, linux, git, libre, español, administrador, web, redes, free, programación, coding, cool, pi"><link rel="shortcut icon" href="favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="css/coso.css">
+<meta name="keywords" content="cpanp,bases,para,instalar,módulos,Perl">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head><body>
+<div><a href="index.html">Volver</a></div><h1>cpanp: bases para instalar módulos en Perl</h1>
+
+<p>Siempre comento que hay que instalar tal o cual módulo de Perl para hacer alguna cosa.</p>
+
+<p>Alcanza con ejecutar el siguiente comando:</p>
+
+<pre><code>cpanp i Nombre::Modulo
+</code></pre>
+
+<p>Recapitulando, hay muchas formas de instalar un módulo en Perl. Personalmente, usé <strong>cpan</strong> 
+(el sistema de instalación por defecto) un tiempo y siempre me pasaba que tardaba más tiempo
+configurando que efectivamente instalando el módulo. Ni que hablar cuando es un sistema nuevo, 
+remoto o con los módulos empaquetados y distribuídos por separado en el repo oficial de la 
+distribución (escenario muy común).</p>
+
+<p>Al día de hoy uso <em>cpanplus</em> y simplemente lo recomiendo.
+No requiere ninguna configuración para hacer el trabajo y 'funka'.</p>
+
+<p>Los paths donde los módulos residen son un asunto bastante oscuro y responden a 
+diferenciaciones de antaño, que tenían sentido en la época en que Perl nació... Siempre
+me dió esa impresión y siempre que necesité instalar módulos, me era difícil saber con 
+anterioridad a dónde iban a parar los archivos que lo componían.</p>
+
+<p>Un dato, los <strong>::</strong> significan <strong>/</strong>. O sea, para el módulo 'File::Slurp', "File" es una carpeta y 
+"Slurp.pm" el módulo que en ella reside...</p>
+
+<p>Usando <strong>perldoc</strong>, podemos saber dónde fue a parar:</p>
+
+<pre><code>perldoc -l File::Slurp # por ejemplo
+</code></pre>
+
+<p>También, y más productivo, podemos ver el código que lo compone. A veces es interesante lo que se 
+puede encontrar cuando nos preguntamos "¿cómo hace este módulo para...?"</p>
+
+<pre><code>perldoc -m File::Slurp
+</code></pre>
+
+<p>Es muy común que cpanp nos pregunta que hacer con las dependencias insatisfechas del módulo que nos
+interesa instalar y nos muestre un menú que nos interroga:</p>
+
+<ul>
+<li>1) Yes</li>
+<li>2) No</li>
+<li>3) Yes to All</li>
+<li>4) Yes to all for this module</li>
+</ul>
+
+<p>o muy parecido...</p>
+
+<p>Como no tengo problemas de espacio en disco, siempre termino eligiendo la opcion 3.</p>
+
+<p>Hay una forma de configurar cpanp, para que se guarde la molesta preguntita:</p>
+
+<pre><code>s conf prereqs 3; s save
+</code></pre>
+
+<p>(Escribir lo anterior en el shell)</p>
+
+<p>Otra opción importante a considerar es <strong>--skiptests</strong>, ya que por defecto siempre va a realizar las
+pruebas de todos los módulos y a menudo son irrelevantes (si funciona File::Find, File::Find::Rule no tiene
+razón para fallar y las pruebas no nos aportan mucha información, ni que hablar si simplemente estamos reinstalando
+un módulo).</p>
+
+<p>Una vez escuché por ahí:</p>
+
+<blockquote>
+  <p>"CPAN es mi lenguaje; Perl es mi framework."</p>
+</blockquote>
+
+<p>Y eso es todo por ahora...</p>
+
+
+<div id="disqus_thread"></div><script>
+    var disqus_config = function () {
+        this.page.url = 'https://3456.com.ar/cpanp_bases_para_instalar_modulos_en_Perl.html';
+        this.page.identifier = '"3456-cpanp_bases_para_instalar_modulos_en_Perl"';
+    };
+    (function() { 
+        var d = document, s = d.createElement("script");
+        s.src = "https://3456.disqus.com/embed.js"; 
+        s.setAttribute("data-timestamp", +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>JavaScript es necesario para ver los <a href="https://disqus.com/?ref_noscript" rel="nofollow">comentarios.</a></noscript>
+<div><a href="index.html">Volver</a></div><span>Última modificación: 27-abril-2016 16:23 by <strong>MarxBro</strong>.<a href="http://www.wtfpl.net/"><img src="/data/wtfpl.png" alt="MarxBro. WTFPL-2016" /></a></span></body></html>

@@ -1,0 +1,51 @@
+<!doctype html><head><meta name="author" content="MarxBro"><meta name="description" content="Blog personal acerca de linux, perl, tecnologías libres y la mar en coche."><meta name="keywords" content="perl, hack, tecnologia, vim, linux, git, libre, español, administrador, web, redes, free, programación, coding, cool, pi"><link rel="shortcut icon" href="favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="css/coso.css">
+<meta name="keywords" content="Afinador,guitarrístico">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head><body>
+<div><a href="index.html">Volver</a></div><h1>Afinador guitarrístico</h1>
+
+<p>Para afinar la guitarra, uno normalmente se compra un afinador, no?</p>
+
+<p>Podría no hacer falta, hay algunos muy buenos programas y aplicaciones para el
+teléfono, etc.</p>
+
+<p>Acá abajo esta <strong>el afinador que nadie necesita</strong>... </p>
+
+<pre><code>for n in E2 A2 D3 G3 B3 E4;do play -n synth 4 pluck $n repeat 2;done
+</code></pre>
+
+<p>Yo lo tengo como un alias, mas o menos así:</p>
+
+<pre><code>alias GUITARRA='for n in E2 A2 D3 G3 B3 E4;do play -n synth 4 pluck $n repeat 2;done'
+</code></pre>
+
+<p>No es el comando más elegante, ni el más útil, pero funcional (o mas o menos). </p>
+
+<p>Utiliza <strong>sox</strong> y el algoritmo 
+ <a href="http://music.columbia.edu/cmc/MusicAndComputers/chapter4/0409.php">pluck</a>
+ es el que le da ese "timbre de cuerda pulsada" (Karplus-Strong)...</p>
+
+<p>Se puede afinar la guitarra calibrando las alturas desde los sonidos en la
+ entrada de audio, pero requiere procedimientos -un poco- mas complejos. </p>
+
+<p>Con <strong>pd</strong> se puede hacer relativamente rápido, y como es tan fácil, no lo voy a
+ poner por acá... <em>que quede como ejercicio para el lector</em> :P.</p>
+
+<p><em>En cunato consiga un poco de tiempo, se viene el afinador en chuck y pd...</em></p>
+
+
+<div id="disqus_thread"></div><script>
+    var disqus_config = function () {
+        this.page.url = 'https://3456.com.ar/Afinador_guitarristico.html';
+        this.page.identifier = '"3456-Afinador_guitarristico"';
+    };
+    (function() { 
+        var d = document, s = d.createElement("script");
+        s.src = "https://3456.disqus.com/embed.js"; 
+        s.setAttribute("data-timestamp", +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>JavaScript es necesario para ver los <a href="https://disqus.com/?ref_noscript" rel="nofollow">comentarios.</a></noscript>
+<div><a href="index.html">Volver</a></div><span>Última modificación: 27-abril-2016 16:23 by <strong>MarxBro</strong>.<a href="http://www.wtfpl.net/"><img src="/data/wtfpl.png" alt="MarxBro. WTFPL-2016" /></a></span></body></html>

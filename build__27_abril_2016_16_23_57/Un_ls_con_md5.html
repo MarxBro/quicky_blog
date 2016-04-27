@@ -1,0 +1,59 @@
+<!doctype html><head><meta name="author" content="MarxBro"><meta name="description" content="Blog personal acerca de linux, perl, tecnologías libres y la mar en coche."><meta name="keywords" content="perl, hack, tecnologia, vim, linux, git, libre, español, administrador, web, redes, free, programación, coding, cool, pi"><link rel="shortcut icon" href="favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="css/coso.css">
+<meta name="keywords" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head><body>
+<div><a href="index.html">Volver</a></div><h1>Un ls con md5</h1>
+
+<p>El programa que sigue, lo fui dejando en distintos lugares a lo largo del
+ tiempo, y ha sido un poco abandonado... Es uno de los primero script útiles que
+ hice, hace como 6 o 7 años.</p>
+
+<p>Lo retomé hace poco ya que se mezclaban versiones de archivos iguales en una de
+ la carpetas donde trabajo, bla bla.</p>
+
+<p>La idea es un <em>ls en esteroides</em>, que permita ver claramente los <em>hashs md5</em> de
+ los archivos en "donde estoy parado" y que sea <em>permeable a expansiones en el
+ nombre de los archivos</em> (igual que como ls es).</p>
+
+<p>Por ejemplo, con <strong>ls</strong> uno puede hacer:</p>
+
+<pre><code>ls *.txt
+</code></pre>
+
+<p>para ver una lista simple de los archivos cuya extensión es "txt".</p>
+
+<p>Con este programa también!</p>
+
+<p>En general, un hash md5 por archivo, en una carpeta donde hay muchos, no es una
+buena idea en lo que se refiere al tiempo... Pero en el caso en el que yo lo
+necesitaba, no me preocupaba mucho: tenía ese tiempo disponible a ser
+sacrificado en aras de una buena e inequívoca rotulación.</p>
+
+<p>Además, no es necesario repetir la operación:</p>
+
+<pre><code>LS.pl '*.iso' &gt;&gt; MD5.sum
+</code></pre>
+
+<p>Después <em>se ven los réditos</em>:</p>
+
+<pre><code>grep '234fmg' MD5.sum | awk '{print $1}'
+</code></pre>
+
+<p>Se puede encontrar <a href="/dwns/LS.txt">aca</a>.</p>
+
+
+<div id="disqus_thread"></div><script>
+    var disqus_config = function () {
+        this.page.url = 'https://3456.com.ar/Un_ls_con_md5.html';
+        this.page.identifier = '"3456-Un_ls_con_md5"';
+    };
+    (function() { 
+        var d = document, s = d.createElement("script");
+        s.src = "https://3456.disqus.com/embed.js"; 
+        s.setAttribute("data-timestamp", +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>JavaScript es necesario para ver los <a href="https://disqus.com/?ref_noscript" rel="nofollow">comentarios.</a></noscript>
+<div><a href="index.html">Volver</a></div><span>Última modificación: 27-abril-2016 16:23 by <strong>MarxBro</strong>.<a href="http://www.wtfpl.net/"><img src="/data/wtfpl.png" alt="MarxBro. WTFPL-2016" /></a></span></body></html>
