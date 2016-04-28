@@ -2,7 +2,7 @@
 
 Ditto:
 
-    ntp -gq
+    ntpd -gq
 
 Como siempre me olvido como era, lo agrego por acá...
 
