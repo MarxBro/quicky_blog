@@ -21,7 +21,7 @@ Para debuggear y agregar definiciones de colores, se puede usar algo así.
         echo map(synstack(line('.'), col('.')),'synIDattr(v:val, "name")')
     endfunc
 
-> Esta idea la saqué de un vimcast.
+> Esta idea la saqué de un [vimcast](https://3456.com.ar//Vimcasts.html).
 
 Se ve más o menos así:
 

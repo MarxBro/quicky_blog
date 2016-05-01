@@ -1,9 +1,8 @@
 # Un par de aproximaciones de pi
 
-Nuevamente hablando de _pi_...
+[Nuevamente](https://3456.com.ar//Ploteando_los_decimales_de_Pi.html) hablando de _pi_...
 
-Esta es una aproximación milenaria, atribuída a [Liu Hui](https://en.wikipedia.org/wiki/Liu_Hui), un gran matemático chino que vivió
-en siglo 3 de nuestra era.
+Esta es una aproximación milenaria, atribuída a [Liu Hui](https://en.wikipedia.org/wiki/Liu_Hui), un gran matemático chino que vivió en el siglo tercero de nuestra era.
 
 Quiero mostrar [esta remarcable fórmula](https://en.wikipedia.org/wiki/Liu_Hui's_π_algorithm#Quick_method):
 
