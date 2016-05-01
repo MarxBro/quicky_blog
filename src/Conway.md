@@ -3,13 +3,16 @@
 Ví un tutorial de POO que usaba como ejemplo y tarea a resolver, el famoso juego
  de la vida de Conway (Conway's game of life).
 
-El resultado de eso, el código, me parecía engorros y bastante feo: muchas
- clases públicas que pasan estados a clases privadas que guardan informacion, bla
- bla... Como si _no fuese una grilla de posiciones_, sino un entramado de objetos
+El resultado de eso, el código, me parecía engorroso y bastante feo: muchas
+ clases públicas que pasan "estados" a clases privadas que guardan "información", bla
+ bla... 
+ 
+Como si _no fuese una grilla de posiciones_, sino un entramado de objetos
  y métodos. Bueno, no niego que es un buen ejercicio, pero __conlleva a resolver
  preguntas aristotélicas sobre que és o no és un objeto__, en cierta forma.
 
-Se me ocurrió que lo podía hacer sin tantas vueltas y programé uno en Perl (estaba aburrido, jeje).
+Se me ocurrió que lo podía hacer sin tantas vueltas y programé uno en 
+ Perl (estaba aburrido, jeje).
 
 !["Se ve más o menos así"](/data/conways.png)
 
