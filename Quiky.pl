@@ -14,6 +14,7 @@ use Text::Markdown          qw/markdown/;
 use File::Find::Rule;
 use List::MoreUtils         qw/uniq/;
 #use Data::Dumper            qw/Dumper/;
+use Text::Format;
 
 =pod
 
@@ -197,7 +198,9 @@ sub build {
         my $contenido = $header_with_css;
         $contenido .= '<body>' . "\n";
         $contenido .= $div_return_home;
-        $contenido .= markdown($shit) . "\n";
+        my $html_content = markdown($shit);
+        $contenido .= $html_content . "\n";
+        my $resumen_contenido = minidescripcion( $html_content );
         if ($comments_allow){
             my $comments = embed_comments($titulo_page,$titulo_index);
             $contenido .= $comments;
@@ -206,7 +209,9 @@ sub build {
         $contenido .= pie();
         my $nombre_archivo_final = $dir_build . '/' . $titulo_page . '.html';
         my $nombre_archivo_final_l = $titulo_page . '.html';
-        $linky{$nombre_archivo_final_l} = $ultima_modificacion . 'spliteo' . $titulo_index;
+        $linky{$nombre_archivo_final_l} = $ultima_modificacion . 'spliteo' . 
+            $titulo_index . 'spliteo' . 
+            $resumen_contenido ;
         write_file( $nombre_archivo_final , optimize($contenido , 0));
     }
 
@@ -244,11 +249,12 @@ sub do_index {
     my $ind = '<table>';
     # Agregado: Ordenar la table por fecha, desc
     foreach my $n_html_page (reverse(sort { $linky{$a} <=> $linky{$b} } keys %linky)){
-        my ($modif,$l) = split(/spliteo/, $linky{$n_html_page});
+        my ($modif,$l,$resumen) = split(/spliteo/, $linky{$n_html_page});
         my $modifiz = mes_bien_pese_a_locales(strftime ("%d - %B - %Y ~  %H:%M",localtime( $modif )));
         my $lllll    = '<tr><td>' .
             '<a href="' . $n_html_page . '" >' . $l . 
             '</a>' . '</td><td>' . $modifiz . '</td>' .
+            '<td><p>' . $resumen  . '</p></td>' .
             '</tr>';
         $ind        .= $lllll . "\n";
     }
@@ -395,6 +401,21 @@ sub mes_bien_pese_a_locales {
     return $mes;
 }
 
+sub minidescripcion {
+    my $texto_completo = shift;
+    $texto_completo =~ m/\Q<p>\E([^<]+)\Q<\/p>\E/;
+    my $mini = $1;
+    #return $1;
+    #my $final = $mini;
+    my $final = Text::Format->new({columns => 50})->format($mini);
+    $final =~ s/\n$/ /g;
+    $final =~ s/\n/<br>/g;
+    $final =~ s/^\s+//g;
+    say $final if $debug;
+    return $final;
+}
+
+
 ######################################################################
 #                                                       P O D  Z O N E
 ######################################################################
@@ -429,3 +450,4 @@ La página se llama así porque __re-pintó__ y está hecha en bas a un CMS que 
 Abajo hay una lista de las cosas que voy escribiendo y reescribiendo.
 
 ## Entradas:
+
