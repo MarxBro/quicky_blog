@@ -441,7 +441,7 @@ Me acostumbré a firmar como __MarxBro__ y eso no creo que cambie en un futuro c
 Acá escribo lo que me va pareciendo relevante o simplemente, lo que tengo ganas de escribir. 
 No es gran cosa y responde casi exclusivamente a mis caprichos informáticos (sobre Perl, Linux y lo que vaya apareciendo).
 
-Mi perfil en github y mis repositorios están [a su disposición](https://github.com/MarxBro).
+Mi [llave pública](/dwns/pgp.txt), perfil en github y mis repositorios están [a su disposición](https://github.com/MarxBro).
 
 Dejen un comentario si tienen algo que decirme, corregirme, putearme, etc.
 
