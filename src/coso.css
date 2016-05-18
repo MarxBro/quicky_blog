@@ -66,11 +66,13 @@ a:hover {
     text-decoration: underline;
 }
 img {
-    /*width: 100%;*/
     max-width: 1800px;
     }
-td p {
-    /*max-width: 60%;*/
+.img_posible>p>img{
+    max-height:80px;
+    max-width:75px;
+}
+td  p, .img_posible p  {
     word-wrap: break-word;    
     overflow-wrap: break-word;    
     text-align: left; 
