@@ -222,7 +222,8 @@ sub build {
     $indexin .= index_datas();
     $indexin .= do_index();
     my $indexin_file_nombre = $dir_build . '/index.html';
-    write_file( $indexin_file_nombre , optimize($indexin,0) );
+    #write_file( $indexin_file_nombre , optimize($indexin,0) );
+    write_file( $indexin_file_nombre ,$indexin );
     do_htaccess();
 }
 
@@ -254,7 +255,7 @@ sub do_index {
         my $lllll    = '<tr><td>' .
             '<a href="' . $n_html_page . '" >' . $l . 
             '</a>' . '</td><td>' . $modifiz . '</td>' .
-            '<td><p>' . $resumen  . '</p></td>' .
+            '<td class="img_posible"><p>' . $resumen  . '</p></td>' .
             '</tr>';
         $ind        .= $lllll . "\n";
     }
@@ -403,15 +404,28 @@ sub mes_bien_pese_a_locales {
 
 sub minidescripcion {
     my $texto_completo = shift;
-    $texto_completo =~ m/\Q<p>\E([^<]+)\Q<\/p>\E/;
+    $texto_completo =~ m#\Q<p>\E(.+)\Q</p>\E#g;
     my $mini = $1;
-    #return $1;
-    #my $final = $mini;
-    my $final = Text::Format->new({columns => 50})->format($mini);
-    $final =~ s/\n$/ /g;
-    $final =~ s/\n/<br>/g;
-    $final =~ s/^\s+//g;
-    say $final if $debug;
+    $mini =~ s/^\s+//;
+    $mini = "Ditto" unless ($mini =~ m/\w+/g);
+    #$mini = "<p>Ditto.</p>" if ($mini =~ m/\s+/g);
+    #say "DESCRIPCION FINAL --- > $mini" if $debug;
+    #return $mini;
+    my $final = Text::Format->new( {
+        columns => 50,
+        firstIndent => 0,
+        noBreak => 1,
+        bodyIndent => 1,
+        #noBreakRegex => { 'a$' => ' ' }
+    })->format($mini);
+    $final =~ s#\n$##g;
+    if ($final =~ m/href/g){
+        $final =~ s#\n# #g;
+        say "DESCRIPCION FINAL --- > $final" if $debug;
+        return $final;
+    }
+    $final =~ s#\n#<br/>#g;
+    say "DESCRIPCION FINAL --- > $final" if $debug;
     return $final;
 }
 
