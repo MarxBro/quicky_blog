@@ -15,6 +15,7 @@ use File::Find::Rule;
 use List::MoreUtils         qw/uniq/;
 #use Data::Dumper            qw/Dumper/;
 use Text::Format;
+use XML::Entities;
 
 =pod
 
@@ -276,19 +277,24 @@ sub do_index {
 # Agregado para probar: rss feeds!
 sub do_rss {
     my $rss_header = '<?xml version="1.0" encoding="UTF-8" ?><rss version="2.0"><channel>' .
-        '<title>'.  $blog_title .  '</title><link>'.  $blog_url .  '</link><description>' .  
-        $blog_desc . '</description>';
+        '<title>'.  xen($blog_title) .  '</title><link>'.  xen($blog_url) .  '</link><description>' .  
+        xen($blog_desc) . '</description>';
 
     my $feeds = $rss_header;
     foreach my $n_html_page (reverse(sort { $linky{$a} <=> $linky{$b} } keys %linky)){
         my ($modif,$l,$resumen) = split(/spliteo/, $linky{$n_html_page});
         my $modifiz = mes_bien_pese_a_locales(strftime ("%d - %B - %Y ~  %H:%M",localtime( $modif )));
-        $feeds .= '<item><title>' . $l. '</title><link>'. $n_html_page . '</link><description>' .
-            $resumen . '</description><pubDate>' . $modifiz . '</pubDate></item>';
+        $feeds .= '<item><title>' . xen($l). '</title><link>'. xen($n_html_page) . '</link><description>' .
+            xen($resumen) . '</description><pubDate>' . xen($modifiz) . '</pubDate></item>';
     }
     $feeds .= '</channel></rss>';
     say $feeds if $debug;
     return $feeds;
+}
+
+sub xen {
+    my $in = shift;
+    return XML::Entities::numify('all',$in);
 }
 
 sub pie{
