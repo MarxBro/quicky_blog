@@ -239,7 +239,7 @@ sub build {
 # R S S
     my $rss_file_out = $dir_build . '/rss';
     my $rss_to_write_file = do_rss();
-    write_file( $rss_file_out , {binmode => ':utf8'}, $rss_to_write_file);
+    write_file( $rss_file_out , $rss_to_write_file);
 }
 
 sub do_SEOand_shut_up{
@@ -299,8 +299,8 @@ sub do_rss {
 
 sub xen {
     my $in = shift;
-    my $out = XML::Entities::numify('all',encode_entities($in));
-    #my $out = encode_entities($in);
+    #my $out = XML::Entities::numify('all',encode_entities($in));
+    my $out = XML::Entities::numify('all', encode_entities($in, '"<>/&%?:'));
     return $out;
 }
 
