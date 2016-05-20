@@ -70,6 +70,8 @@ my $comments_allow = 1; # Cambiar variables en la funcion embed_comments();
 my @keywords_fixed = ( qw /perl hack tecnologia vim linux git libre español administrador web redes free programación coding cool pi/ );
 my $blog_autores = '"MarxBro"';
 my $blog_desc = '"Blog personal acerca de linux, perl, tecnologías libres y la mar en coche."';
+my $blog_url = 'https://3456.com.ar';
+my $blog_title = 'MarxBro blog (aka 3456)';
 
 my $apache_target= 1; # poner en 0 si el servidor en nginx u otro.
 my $htaccess = <<EOF
@@ -224,7 +226,14 @@ sub build {
     my $indexin_file_nombre = $dir_build . '/index.html';
     #write_file( $indexin_file_nombre , optimize($indexin,0) );
     write_file( $indexin_file_nombre ,$indexin );
+    
+# H T A CCESS
     do_htaccess();
+
+# R S S
+    my $rss_file_out = $dir_build . '/rss';
+    my $rss_to_write_file = do_rss();
+    write_file( $rss_file_out , $rss_to_write_file);
 }
 
 sub do_SEOand_shut_up{
@@ -264,6 +273,24 @@ sub do_index {
     return $ind;
 }
 
+# Agregado para probar: rss feeds!
+sub do_rss {
+    my $rss_header = '<?xml version="1.0" encoding="UTF-8" ?><rss version="2.0"><channel>' .
+        '<title>'.  $blog_title .  '</title><link>'.  $blog_url .  '</link><description>' .  
+        $blog_desc . '</description>';
+
+    my $feeds = $rss_header;
+    foreach my $n_html_page (reverse(sort { $linky{$a} <=> $linky{$b} } keys %linky)){
+        my ($modif,$l,$resumen) = split(/spliteo/, $linky{$n_html_page});
+        my $modifiz = mes_bien_pese_a_locales(strftime ("%d - %B - %Y ~  %H:%M",localtime( $modif )));
+        $feeds .= '<item><title>' . $l. '</title><link>'. $n_html_page . '</link><description>' .
+            $resumen . '</description><pubDate>' . $modifiz . '</pubDate></item>';
+    }
+    $feeds .= '</channel></rss>';
+    say $feeds if $debug;
+    return $feeds;
+}
+
 sub pie{
    my $fin = $pie_html . '</body></html>';
    return $fin;
@@ -273,12 +300,13 @@ sub make_header {
     my $in = $_[0];
     my $in_2 = $_[1];
     my $fucking_utf = '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>' . "\n";
+    my $rss_link_header = '<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="' . $blog_url . '/rss">';
     my $fucking_seo = do_SEOand_shut_up();
     my $H;
     if ($in_2){
-        $H = '<!doctype html><head>' . $fucking_seo . $favico_link_para_header . "\n" . $in . $in_2 . "\n" . $fucking_utf . '</head>';
+        $H = '<!doctype html><head>' . $rss_link_header . $fucking_seo . $favico_link_para_header . "\n" . $in . $in_2 . "\n" . $fucking_utf . '</head>';
     } else {
-        $H = '<!doctype html><head>' . $fucking_seo . $favico_link_para_header . "\n" . $in . "\n" . $fucking_utf . '</head>';
+        $H = '<!doctype html><head>' . $rss_link_header . $fucking_seo . $favico_link_para_header . "\n" . $in . "\n" . $fucking_utf . '</head>';
     }
     return $H;    
 }
