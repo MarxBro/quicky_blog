@@ -299,7 +299,8 @@ sub do_rss {
 
 sub xen {
     my $in = shift;
-    my $out = XML::Entities::numify('all',encode_entities($in));
+    #my $out = XML::Entities::numify('all',encode_entities($in));
+    my $out = encode_entities($in);
     return $out;
 }
 
