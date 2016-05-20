@@ -17,6 +17,11 @@ use List::MoreUtils         qw/uniq/;
 use Text::Format;
 use XML::Entities;
 
+use HTML::Entities;
+%HTML::Entities::char2entity = %{
+    XML::Entities::Data::char2entity('all');
+ };
+
 =pod
 
 =encoding utf8
@@ -294,7 +299,8 @@ sub do_rss {
 
 sub xen {
     my $in = shift;
-    return XML::Entities::numify('all',$in);
+    my $out = XML::Entities::numify('all',encode_entities($in));
+    return $out;
 }
 
 sub pie{
