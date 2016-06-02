@@ -12,7 +12,6 @@ La idea es más o menos así:
 * Un script simple, elige aleatoriamente alguna imágen.
 * Mediante un programa externo (__hsetroot__, __nitrogen__...) lo pone como fondo del "escritorio".
 
-
     DIR_WALLS=( `echo /mnt/Imagenes/Walls/*.{jpg,png,jpeg,JPG,JPEG,PNG}`)
     Lista(){
         for i in ${DIR_WALLS[*]}; do
