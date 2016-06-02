@@ -14,14 +14,14 @@ La idea es más o menos así:
 
 
 
-    DIR_WALLS=( `echo /mnt/Imagenes/Walls/*.{jpg,png,jpeg,JPG,JPEG,PNG}`)
+    DIRWALLS=( `echo /mnt/Imagenes/Walls/*.{jpg,png,jpeg,JPG,JPEG,PNG}`)
     Lista(){
-        for i in ${DIR_WALLS[*]}; do
+        for i in ${DIRWALLS[*]}; do
             echo "$i"
         done
     }
     [ $1 ] && Lista | column && exit 0
-    hsetroot -fill "${DIR_WALLS[$RANDOM % ${#DIR_WALLS[*]}]}" &&
+    hsetroot -fill "${DIRWALLS[$RANDOM % ${#DIRWALLS[*]}]}" &&
     exit 0
 
 
