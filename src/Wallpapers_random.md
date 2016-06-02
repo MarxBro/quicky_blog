@@ -12,15 +12,20 @@ La idea es más o menos así:
 * Un script simple, elige aleatoriamente alguna imágen.
 * Mediante un programa externo (__hsetroot__, __nitrogen__...) lo pone como fondo del "escritorio".
 
+
+
     DIR_WALLS=( `echo /mnt/Imagenes/Walls/*.{jpg,png,jpeg,JPG,JPEG,PNG}`)
     Lista(){
-    for i in ${DIR_WALLS[*]}; do
-    echo "$i"
-    done
+        for i in ${DIR_WALLS[*]}; do
+            echo "$i"
+        done
     }
     [ $1 ] && Lista | column && exit 0
     hsetroot -fill "${DIR_WALLS[$RANDOM % ${#DIR_WALLS[*]}]}" &&
     exit 0
+
+
+
 
 Como yapa le agregué una posiblidad de _listar_ todos los posibles wallpapers...
 
