@@ -13,10 +13,6 @@ La idea es más o menos así:
 * Mediante un programa externo (__hsetroot__, __nitrogen__...) lo pone como fondo del "escritorio".
 
 
-    #!/bin/bash
-    ######################################################################
-    # Random_Walls.sh -> Un wallpaper random... y no mucho mas.
-    ################################################################
     DIR_WALLS=( `echo /mnt/Imagenes/Walls/*.{jpg,png,jpeg,JPG,JPEG,PNG}`)
     
     Lista(){
