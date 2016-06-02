@@ -1,4 +1,4 @@
-# Fondos aleaatorios (a.k.a random wallpapers)
+# Fondos aleatorios (a.k.a random wallpapers)
 
 Esta es una simple idea que tuve una vez y a partir de ahí lo vengo usando.
 
