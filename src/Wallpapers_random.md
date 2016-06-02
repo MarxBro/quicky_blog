@@ -14,17 +14,14 @@ La idea es más o menos así:
 
 
     DIR_WALLS=( `echo /mnt/Imagenes/Walls/*.{jpg,png,jpeg,JPG,JPEG,PNG}`)
-    
     Lista(){
-    for i in ${DIR_WALLS[*]}; do
-        echo "$i"
-    done
+        for i in ${DIR_WALLS[*]}; do
+            echo "$i"
+        done
     }
-    
     [ $1 ] && Lista | column && exit 0
     hsetroot -fill "${DIR_WALLS[$RANDOM % ${#DIR_WALLS[*]}]}" &&
-        echo -e "Gol\n" &&
-        exit 0
+    exit 0
 
 Como yapa le agregué una posiblidad de _listar_ todos los posibles wallpapers...
 
