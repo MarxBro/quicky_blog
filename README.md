@@ -27,3 +27,6 @@ Hay unas cuantas opciones que no hacen del todo feliz la adaptación de este eng
 
 Me quedaría limpiarlo y convertirlo en algo mas general (como para ocmpartirlo con el mundo). Pero por el
  momento no hay mucho interés y se queda así. _Avísenme si es requerido por alguien!_
+
+
+Hay un bug en el módulo de markdown: evitar el código después de una lista (ul> li).
