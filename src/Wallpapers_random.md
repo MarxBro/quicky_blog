@@ -14,7 +14,7 @@ La idea es más o menos así:
 
 
 
-    DIRWALLS=( `echo /mnt/Imagenes/Walls/*.{jpg,png,jpeg,JPG,JPEG,PNG}`)
+    DIRWALLS=( $( echo /mnt/Imagenes/Walls/*.{jpg,png,jpeg,JPG,JPEG,PNG} ) )
     Lista(){
         for i in ${DIRWALLS[*]}; do
             echo "$i"
