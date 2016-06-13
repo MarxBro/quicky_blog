@@ -279,6 +279,7 @@ sub do_index {
     return $ind;
 }
 
+
 # Agregado para probar: rss feeds!
 sub do_rss {
     my $rss_header = '<?xml version="1.0" encoding="UTF-8" ?><rss version="2.0"><channel>' .
@@ -288,7 +289,8 @@ sub do_rss {
     my $feeds = $rss_header;
     foreach my $n_html_page (reverse(sort { $linky{$a} <=> $linky{$b} } keys %linky)){
         my ($modif,$l,$resumen) = split(/spliteo/, $linky{$n_html_page});
-        my $modifiz = mes_bien_pese_a_locales(strftime ("%d - %B - %Y ~  %H:%M",localtime( $modif )));
+        my $modifiz = mes_bien_pese_a_locales(strftime ("%a, %d %m %Y %T %Z",localtime( $modif )));
+        say $modifiz if $debug;
         $feeds .= '<item><title>' . xen($l). '</title><link>'. xen($n_html_page) . '</link><description>' .
             xen($resumen) . '</description><pubDate>' . xen($modifiz) . '</pubDate></item>';
     }
