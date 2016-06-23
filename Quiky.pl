@@ -502,7 +502,7 @@ Mi [llave pública](/dwns/pgp.txt), perfil en github y mis repositorios están [
 
 Dejen un comentario si tienen algo que decirme, corregirme, putearme, etc.
 
-La página se llama así porque __re-pintó__ y está hecha en bas a un CMS que hice por ahí.
+La página se llama así porque _re-pintó_ y está hecha en base a un CMS que [hice por ahí](https://3456.com.ar/Este_CMS.html).
 
 Abajo hay una lista de las cosas que voy escribiendo y reescribiendo.
 
