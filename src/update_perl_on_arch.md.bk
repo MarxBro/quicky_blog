@@ -1,0 +1,140 @@
+
+Puede traer problemas como este:
+
+    Encode.c: loadable library and perl binaries are mismatched (got handshake key 0x7ec0080, needed 0x7f00080)
+    
+O este:
+    
+    SSLeay.c: loadable library and perl binaries are mismatched (got handshake key 0x7ec0080, needed 0x7f00080)
+
+Eso quiere decir simplemente que __la versión de Perl difiere de la versión
+contra la cual tal extensión fue compilada__. Es muy común que pase en Arch, y
+bastante molesto y no tiene una solución sensata.
+
+Paso a explicar un poco que quiero decir con esto.
+
+Cuando Perl es compilado desde el código fuente, compila sus _core modules_ para
+ser utilizados en/contra esa versión específica. Para la mayoría de los módulos,
+no hay mayor inconveniente.
+
+Depende del módulo puntual su implementación. En general, consisten en
+rutinas y objetos escritos en el mismo lenguaje: cuando es así no hay ningún
+problema. En cambio, __cuando alguna parte del módulo está implementada directamente en C (que es
+bastante común), fue compilado contra una version de Perl anterior!__.
+
+Después de una actualización, la versión cambia por una mas nueva y aparece el
+__maldito error de handshake__ que vimos al inicio.
+
+Cada Perl tiene su propio handshake y __la solución no es editar el archivo binario para cambiar el
+string del handhake__: eso solamente traería "egmentation faults" en momentos
+impensados e inesperados, y lo único que hace es posponer el problema (que aún
+sigue ahí).
+
+Como expliqué arriba y anticipé antes, __no hay una solución sensata__.
+
+La única solución es __REINSTALAR LOS MÓDULOS CONFLICTIVOS__...
+
+## ¿Cuáles son los módulos conflictivos?
+
+Buena pregunta!
+
+Estoy tentado a decir __todos__, pero __estaría exagerando__.
+
+Básicamente, tenemos problemas cargado extensiones escritas y ya compiladas, en
+Linux esos archivos _tienen la extesión .so_.
+
+## ¿Cómo lencuentro esas malditas librerías?
+
+> Ja! No son malditas, Net::SSL es maravilloso al igual que Encode y otras...
+
+Perl coloca sus cosas en algunas carpetas clave, para saber cuales son, se
+puede:
+
+    perl -E 'say foraech @INC'
+
+Eso muestra los _paths desde donde Perl invoca sus librerías_.
+
+En mi caso puntual:
+
+* /usr/lib/perl5/*
+* /usr/share/perl5/*
+
+Para ubicar las librerías, hice esto (no soy _find friendly_ como dije
+anteriormente y find puede ser reemplazado por tree también!):
+
+    cd /usr/lib/perl5 && find | grep "so$"
+    cd /usr/share/perl5 && find | grep "so$"
+
+En mi caso, están todas en la primera carpeta (abrevié mucho la salida con otro
+grep y tail!):
+
+    /usr/lib/perl5/site_perl/auto/Encode/EBCDIC/EBCDIC.so
+    /usr/lib/perl5/site_perl/auto/Encode/JP/JP.so
+    /usr/lib/perl5/site_perl/auto/Encode/TW/TW.so
+    /usr/lib/perl5/site_perl/auto/Encode/Unicode/Unicode.so
+    /usr/lib/perl5/site_perl/auto/Encode/CN/CN.so
+
+En general, lo que falla es la compilación previamente hecha. Entonces, _lo que
+falla son todos esos .so construidos_... No?
+
+Más o menos. La cosa viene de largo, de mucho tiempo atrás...
+
+Para entender esto habría que tener en cuenta también como funciona el
+__@INC__... Es más o menos así:
+
+* Lo que se instaló por nosotros o el administrador, va en __site_perl__.
+* Lo que se instaló mediante la distribución, va en __vendor_perl__.
+* Lo que se instaló junto con Perl (el core o núcleo), va en __core_perl__.
+
+Entonces, lo que está fallando __no son todas esas librerías__, sino __aquellas que
+están en site_perl__.
+
+# Ok... Entonces?
+
+Desde acá hay varias opciones, pero como dije antes: __no hay magia negra que
+evite lel mal handshake, y la única solución es recompilar todo aquello que
+falle contra la nueva versión de Perl__. Reformulo, no _conozco_ otro camino
+(puede ser posible mediante otro tipo de herramientas que desconozco).
+
+Para evitar que falle el _handshake_, se puede directamente __renombrar
+site_perl__.
+
+Ya sé es una solución bruta y poco feliz... Pero no hay mucho más para hacer.
+
+# Todo falla!
+
+Si renombramos ahí, __todos los módulos instalados mediante cpan van a fallar...  y esa es exactamente la idea__!
+
+Pero a no desesperar que hay un par de cosas más para hacer:
+
+* Encontrar todos los módulos instalados
+* Reinstalar todo mediante cpanp o algo así.
+
+Como yo uso _cpan-plus_, encontrar qué módulos fueron instalados en
+relativamente fácil: __cpanp guarda un log por cada uno en la carpeta ~/.cpanplus__.
+
+Ahí está lo único que a esta altura me importa: __el nombre__.
+
+> Si consigo una lista de lo que está instalado mediante cpan, tengo una lista de
+> todo lo que yo instalé "manualmente".
+
+Usé un comando poco elegante, pero efectivo:
+
+    find install-logs/ | awk -F\/ '{print $2}' | sed 's/-/@/g' | sed^Cs/[0-9]//g' | sed 's/\.//g' | cut -d@ -f-3 | sed 's/@/::/g' | sed 's/::$//g'  
+
+El resultado de esa monstruosidad es la lista que busco. Para pasarla como
+argumento  a cpanp se puede pipear a xargs.
+
+    cpanp i $(cat LISTA | xargs)
+
+No es precisamente algo rápido... Pero soluciona la historia.
+
+Alguien me dijo que no sería necesario reinstalar todo, sino que ver qué falla y
+cuando e ir instalando paso por paso aquello que perl no puede encontrar. Es una
+buena idea y salvaría espacio, pero yo prefiero hacer todo de una vez, lo más
+rápido posible...
+
+Hablando de tamaño, cpanplus guarda varias de sus compilaciones en la carpeta
+mencionada anteriormente, que son completamente inútiles (a menos que usen más
+de una versión de perl en simultáneo). __Se puede borrar tranquilamente y salvar
+bastante espacio__.
