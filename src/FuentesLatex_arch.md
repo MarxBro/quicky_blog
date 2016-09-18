@@ -19,21 +19,25 @@ Están en varios lugares, divididas en el árbol de carpetas latex...
 Hay que encontrar una que vaya como trompada o quedarse con la default, _para
  todo lo demás existe Lyx, TeXMate and so on__...
 
-En mi caso, a mi me gusta __palatino__ para este caso.
+En mi caso, a mi me gusta __palatino__ para esta ocasión.
 
-La idea es decirle a pandoc que dumpee la configuración por default en la
- consola así:
+La idea es _decirle a pandoc que dumpee la configuración por defecto para un
+documento LaTex_ en la consola. Es fácil,así:
 
-    pandoc -D latex
+    pandoc -D latex > dumplatex
 
 Después vamos a editar el archivo "dump_latex" y cambiar en el comienzo:
 
     s/lmodern/palatino/
 
 Y, por último, decirle a pandoc que use esa información en reemplazo del
- template por defecto. Nuestro template es igual, y lo único que cambiamos es la
+ template por defecto. 
+
+    pandoc -f markdown -t latex --template=dumplatex source.md docfinal.pdf
+ 
+Nuestro template es igual, y lo único que cambiamos es la
  fuente así que va a andar; pero no hay porqué quedarse únicamente con la fuente
  y se pueden cambiar otras cosas a gusto y necesidad de cada uno: a mi me alcanza
- con la fuente por ahora.
+ con la fuente (por ahora).
 
 > Eso es todo amigos... ¿Cada vez menos, no? Ja!
