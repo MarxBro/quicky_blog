@@ -1,0 +1,39 @@
+# Listar las fuentes Latex en Arch
+
+Quería usar alguna fuente sans-serif para un documento escrito en mardown, que va a
+ ser un pdf mediante la conversion latex por la gracia de pandoc. El tema es
+ _cómo cambiar la fuente default de esos pdfs_.
+
+No es que no me guste, pero no estaba precisamente escribiendo un paper y en
+ LaTex, __todo se ve como un paper__... 
+
+Los archivos .sty están en:
+
+    ls /usr/share/texmf-dist/tex/latex/psnfss/*.sty
+
+Están en varios lugares, divididas en el árbol de carpetas latex...
+
+    ls /usr/share/texmf-dist/tex/latex/pxfonts
+    ls /usr/share/texmf-dist/tex/latex/qfonts
+
+Hay que encontrar una que vaya como trompada o quedarse con la default, _para
+ todo lo demás existe Lyx, TeXMate and so on__...
+
+En mi caso, a mi me gusta __palatino__ para este caso.
+
+La idea es decirle a pandoc que dumpee la configuración por default en la
+ consola así:
+
+    pandoc -D latex
+
+Después vamos a editar el archivo "dump_latex" y cambiar en el comienzo:
+
+    s/lmodern/palatino/
+
+Y, por último, decirle a pandoc que use esa información en reemplazo del
+ template por defecto. Nuestro template es igual, y lo único que cambiamos es la
+ fuente así que va a andar; pero no hay porqué quedarse únicamente con la fuente
+ y se pueden cambiar otras cosas a gusto y necesidad de cada uno: a mi me alcanza
+ con la fuente por ahora.
+
+> Eso es todo amigos... ¿Cada vez menos, no? Ja!
