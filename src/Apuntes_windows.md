@@ -27,11 +27,11 @@ Similar a la idea anterior del mailing, las herramientas que Windows ofrece para
 No gastarse _nunca_ configurando servicios desde el asistente de Windows: es una
  muy mala idea.
 
-En su lugar, utilizar **nssm**.
+En su lugar, utilizar [nssm](https://nssm.cc/).
 
 ## Mailing
 
-Utilizar **hMailServer**... 
+Utilizar [hMailServer](http://www.hmailserver.com).
 
 ## Para remover software
 
