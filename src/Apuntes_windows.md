@@ -18,11 +18,11 @@ Esto tiene que ser un paso automático, pero es sorprendente la cantidad de vece
 Ditto. Las funciones hay que agregarlas unicamente si se sabe de antemano y muy
  claramente qué hacen, cómo y mediante qué medios.
 
-Similar a la idea anterior del mailing, las herramientas que Windows ofrece para
+Las herramientas que Windows ofrece para
  gestionar los servicios son muy a menudo inferiores a lo que se encuentra en la
  comunidad open source (por no decir que siempre son inferiores).
 
-## Servicios
+## Servicios del sistema
 
 No gastarse _nunca_ configurando servicios desde el asistente de Windows: es una
  muy mala idea.
