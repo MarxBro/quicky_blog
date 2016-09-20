@@ -19,7 +19,7 @@ Están en varios lugares, divididas en el árbol de carpetas latex...
 Hay que encontrar una que vaya como trompada o quedarse con la default, _para
  todo lo demás existe Lyx, TeXMate and so on..._
 
-En mi caso, a mi me gusta __palatino__ para esta ocasión.
+A mi me gustaba __palatino__ para esta ocasión.
 
 La idea es _decirle a pandoc que dumpee la configuración por defecto para un
 documento LaTex_ en la consola. Es fácil,así:
