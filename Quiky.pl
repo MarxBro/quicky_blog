@@ -53,9 +53,6 @@ my $dir_src     = "./src";
 my $dir_dwns    = "dwns";
 my %linky       = ();
 
-# Un pie al final de cada página
-my $pie_html    = '<span>' . 'Última modificación: ' . 
-                    $t_manzan . ' by <strong>MarxBro</strong>.' . '</span>';
 
 #Favicon: Previene el error 404
 my $favico_link_para_header = '<link rel="shortcut icon" href="favicon.ico"/>';
@@ -64,11 +61,14 @@ my $favico_link_para_header = '<link rel="shortcut icon" href="favicon.ico"/>';
 my $comments_allow = 1; # Cambiar variables en la funcion embed_comments();
 
 # S E O ( o algo asi )
-my @keywords_fixed = ( qw /tecnologia linux perl git libre español administrador seo web internet redes free programación coding/ );
-my $blog_autores = '"MarxBro"';
-my $blog_desc = '"Blog personal acerca de linux, perl, tecnologías libre y la mar en coche."';
+my @keywords_fixed = ( qw /tecnologia linux perl git/ );
+my $blog_autores = '"Soraida"';
+my $blog_desc = '"Blog personal"';
 
 
+# Un pie al final de cada página
+my $pie_html    = '<span>' . 'Última modificación: ' . 
+                    $t_manzan . ' by <strong>'. $blog_autores .'</strong>.' . '</span>';
 
 my $exitos = "Todo anduvo joya; en la carpeta " . $dir_build . " esta el blog.";
 
@@ -284,9 +284,9 @@ sub optimize {
 
 
 sub embed_comments {
-    my $disqus_page_url         = '"https://3456.com.ar"' ;
-    my $disqus_identifier       = '"3456"';
-    my $disqus_forum_shortname  = 3456;
+    my $disqus_page_url         = '"https://URL.com"' ;
+    my $disqus_identifier       = '"NAME"';
+    my $disqus_forum_shortname  = 127361823;
 
     my $comments = '
 <div id="disqus_thread"></div><script>
