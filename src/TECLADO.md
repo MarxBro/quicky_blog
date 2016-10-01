@@ -1,0 +1,32 @@
+# Teclado USB en español
+
+Me pasó que al conectar un teclado USB en mi notebook, el layout de las teclas
+ estaba en inglés por defecto. 
+
+En general, uso el layout español y este error es bastante coún: de hecho, ni
+ siquiera es un error ya que únicamente está levantando la configuración por
+ defecto y no hay ninguna para los teclados USB.
+
+_La idea es crear una regla de input para X11 que automáticamente ponga
+ cualquier teclado usb al layout español_.
+
+## Solución
+
+Es simple.
+
+Hay que crear un archivo en __/etc/X11/xorg.conf.d__, que contenga esto:
+
+    Section "InputClass"
+        Identifier         "Keyboard Defaults"
+        MatchIsKeyboard	   "yes"
+        MatchProduct       "keyboard"
+        Option  "XkbLayout"  "es"
+    EndSection
+
+Al mío lo bauticé "11-usb-keyboard.conf" como habían sugerido por acá en al wiki
+ de Arch, pero el nombre no importa demasiado. _Lo que sí importa es que tenga
+ permisos de lectura para cualquier usuario que use el display_.
+
+Después solo resta reiniciar X y enchufar el teclado.
+
+> Zaijian!
