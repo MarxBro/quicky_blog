@@ -3,7 +3,7 @@
 Me pasó que al conectar un teclado USB en mi notebook, el layout de las teclas
  estaba en inglés por defecto. 
 
-En general, uso el layout español y este error es bastante coún: de hecho, ni
+En general, uso el layout español y este error es bastante común: de hecho, ni
  siquiera es un error ya que únicamente está levantando la configuración por
  defecto y no hay ninguna para los teclados USB.
 
@@ -23,8 +23,8 @@ Hay que crear un archivo en __/etc/X11/xorg.conf.d__, que contenga esto:
         Option  "XkbLayout"  "es"
     EndSection
 
-Al mío lo bauticé "11-usb-keyboard.conf" como habían sugerido por acá en al wiki
- de Arch, pero el nombre no importa demasiado. _Lo que sí importa es que tenga
+Al mío lo bauticé "11-usb-keyboard.conf" como habían sugerido en la (wiki
+ de Arch)[https://bbs.archlinux.org/viewtopic.php?id=130093], pero el nombre no importa demasiado. _Lo que sí importa es que tenga
  permisos de lectura para cualquier usuario que use el display_.
 
 Después solo resta reiniciar X y enchufar el teclado.
