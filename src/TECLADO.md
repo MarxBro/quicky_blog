@@ -23,8 +23,8 @@ Hay que crear un archivo en __/etc/X11/xorg.conf.d__, que contenga esto:
         Option  "XkbLayout"  "es"
     EndSection
 
-Al mío lo bauticé "11-usb-keyboard.conf" como habían sugerido en la (wiki
- de Arch)[https://bbs.archlinux.org/viewtopic.php?id=130093], pero el nombre no importa demasiado. _Lo que sí importa es que tenga
+Al mío lo bauticé "11-usb-keyboard.conf" como habían sugerido en la [wiki
+ de Arch](ttps://bbs.archlinux.org/viewtopic.php?id=130093), pero el nombre no importa demasiado. _Lo que sí importa es que tenga
  permisos de lectura para cualquier usuario que use el display_.
 
 Después solo resta reiniciar X y enchufar el teclado.
