@@ -29,4 +29,25 @@ Al mío lo bauticé "11-usb-keyboard.conf" como habían sugerido en la [wiki
 
 Después solo resta reiniciar X y enchufar el teclado.
 
+## Si falla o si enchufo de nuevo?
+
+Hmmm. sip, puede pasar que al reconectar el teclado no sea reconocido como debe.
+ En tal situación reiniciar X puede ser molesto.
+
+Este es un scriupt viejo que tenía en el path; de el se pueden sacar las ideas
+principales y reaplicarlas a nuestro teclado USB:
+
+* Filtar la salida de xinput hasta que tengamos el número de id de nuestro
+  teclado. En mi caso, tengo que obtener el id del teclado que diga "SIGMACHIP".
+* Usar setxkbmap para configurarlo en el layout de nuestra preferencia.
+
+
+    #!/bin/bash
+    ######################################################################
+    # Teclado USB
+    ######################################################################
+    TECLADO="$(xinput -list | grep 'SIGMACHIP USB' | grep 'keyboard' | awk -F= '{ print $2}' | awk '{print $1 }' | head -1 )"
+    setxkbmap -device $TECLADO -layout es
+    exit 0
+
 > Zaijian!
