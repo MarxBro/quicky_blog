@@ -42,10 +42,6 @@ principales y reaplicarlas a nuestro teclado USB:
 * Usar setxkbmap para configurarlo en el layout de nuestra preferencia.
 
 
-    #!/bin/bash
-    ######################################################################
-    # Teclado USB
-    ######################################################################
     TECLADO="$(xinput -list | grep 'SIGMACHIP USB' | grep 'keyboard' | awk -F= '{ print $2}' | awk '{print $1 }' | head -1 )"
     setxkbmap -device $TECLADO -layout es
     exit 0
