@@ -41,12 +41,18 @@ principales y reaplicarlas a nuestro teclado USB:
   teclado. En mi caso, tengo que obtener el id del teclado que diga "SIGMACHIP".
 * Usar setxkbmap para configurarlo en el layout de nuestra preferencia.
 
-
     TECLADO="$(xinput -list | grep 'SIGMACHIP USB' | grep 'keyboard' | awk -F= '{ print $2}' | awk '{print $1 }' | head -1 )"
-
     setxkbmap -device $TECLADO -layout es
-
     exit 0
 
+Si por alguna razón la parte del "head -1" no lo agarra y configura
+ correctamente, se puede forzar algo así:
+
+    TECLADO=( $(xinput -list | grep 'SIGMACHIP USB' | grep 'keyboard' | awk -F= '{ print $2}' | awk '{print $1 }' | xargs ) )
+    for i in ${TECLADO[*]}; do 
+        #echo $i
+        setxkbmap -device $i -layout es
+    done
+    exit 0
 
 > Zaijian!
