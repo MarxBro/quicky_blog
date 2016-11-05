@@ -7,7 +7,7 @@ empaquetado como módulo ni formar parte de un release-script.
 
 La solución fue -una vez más-, __drush__.  _Drush 9 es compatible con la API de D8_.
 
-# ¿En dónde pongo el código?
+## ¿En dónde pongo el código?
 
 Fácil, aunque nadie lo dice explícitamente... jiji, los drupaleros son bastante
 particulares.
@@ -16,7 +16,7 @@ Hay que hacer un script php como cualquier otro y ponerlo dentro de la ubicació
 del D8. En un hosting, la carpeta suele ser bautizada como "public_html" o
 "web"...
 
-# ¿Cómo se ejecuta?
+## ¿Cómo se ejecuta?
 
 Desde la carpeta root del sitio, ejecutar el script php con un comando mas o
 menos así:
@@ -26,7 +26,7 @@ menos así:
 A partir de acá hay mucha tela que cortar... 
 
 
-# Notas sobre d8
+## Notas sobre d8
 
 Depende puntualmente de qué es lo necesitemos hacer con el Drupal, las 
 clases que vamos a cargar.
@@ -60,7 +60,7 @@ taxonomías, agregar imágenes al nodo, cambiar un nodo preexistente, etc_. En
 general, es ideal para realizar tares tediosas de carga/organización de
 contenido.
 
-# Debug
+## Debug
 
 Para debuguear usando esta idea, conviene usar las bondades de drush:
 
