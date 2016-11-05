@@ -64,7 +64,7 @@ contenido.
 
 Para debuguear usando esta idea, conviene usar las bondades de drush:
 
-    drush_log(print_r($node).'ok');
+    drush_log(print_r($node),'ok');
 
 Esto imprime todo lo que hace a $node en un mensaje "ok" de drush, en la
 consola, mientras el código se ejecuta.
