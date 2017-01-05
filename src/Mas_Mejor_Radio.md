@@ -29,10 +29,8 @@ __La idea es muy simple y minimalista__. El problema es grande y único: _¿Cóm
 
 ## ¿Dónde esta?
 
-Esta en el [mismo repo github](http://github.com/MarxBro/radio_bash), llamado **dmenu_radio.sh** o en este gist:
-
-<script src="https://gist.github.com/MarxBro/9bf8bc4118d6bc4d8b583953873a46bd.js"></script>
-
+Esta en el [mismo repo github](http://github.com/MarxBro/radio_bash), llamado **dmenu_radio.sh** o en este
+ [gist](https://gist.github.com/MarxBro/9bf8bc4118d6bc4d8b583953873a46bd) ([raw](https://gist.githubusercontent.com/MarxBro/9bf8bc4118d6bc4d8b583953873a46bd/raw/0542c9375cd04d4d2aa52da7e016d955b59e9581/dmenu_radio.sh)).
 
 ## Notas
 
