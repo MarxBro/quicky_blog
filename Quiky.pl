@@ -89,7 +89,7 @@ Options -Indexes -FollowSymLinks
 Header add X-XSS-Protection	"1; mode=block"
 Header add X-Content-Type-Options	"nosniff"
 Header add X-Frame-Options	"Deny"
-Header add Content-Security-Policy	"default-src 'self'"
+# Header add Content-Security-Policy	"default-src 'self'"
 Header add Strict-Transport-Security	"max-age=31536000"
 
 
