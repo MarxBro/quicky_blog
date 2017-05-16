@@ -26,6 +26,10 @@ o equivalentemente:
 
     ISEVEN(ROW())
 
+_Si el programa está en español, los nombres de las fórmulas cambian:_
+
+    ESIMPAR(FILA())
+
 Ahora falta seleccionar el formato; en mi caso, prefiero siempre "customizar" el
  estilo (ya que los predefinidos apestan). **Lo único que nos resta hacer es
  cambiar el color de fondo** y listo...
